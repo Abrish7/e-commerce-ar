@@ -1,0 +1,7 @@
+[
+    {"id":1,"name":"Selling","type":"Clothes"},
+    {"id":2,"name":"Deals","type":"Clothes"},
+    {"id":3,"name":"Category","type":"Clothes"},
+    {"id":4,"name":"Saved","type":"Clothes"}
+
+]

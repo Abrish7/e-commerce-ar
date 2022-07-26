@@ -1,0 +1,78 @@
+[
+    {
+        "id":1,
+        "name":"Shoe",
+        "category":"Men",
+        "description":"men shoe for sell thsk eskd ledkwd wkedlkwe wedko best women bag for sell thsk eskd ledkwd wkedlkwe wedko h hfdw.",
+        "price":120.0,
+        "color":"#797677",
+        "image":"assets/images/shoe.png",
+        "property":[
+            {"color":"red"},
+            {"size":"max"}
+        ]
+    },
+    {
+        "id":2,
+        "name":"Bag",
+        "category":"Women",
+        "description":"best Women Bag for sell  bag for sell best women bag for sell thsk eskd ledkwd wkedlkwe wedko h thsk eskd ledkwd wkedlkwe ",
+        "price":500.0,
+        "color":"#d9a5ac",
+        "image":"assets/images/bag.jpeg",
+        "property":[
+            {"color":"red"},
+            {"size":"max"}
+        ]
+    }, {
+        "id":1,
+        "name":"Shoe",
+        "category":"Men",
+        "description":"men shoe for sell thsk eskd ledkwd wkedlkwe wedko best women bag for sell thsk eskd ledkwd wkedlkwe wedko h hfdw.",
+        "price":120.0,
+        "color":"#797677",
+        "image":"assets/images/shoe.png",
+        "property":[
+            {"color":"red"},
+            {"size":"max"}
+        ]
+    },
+    {
+        "id":2,
+        "name":"Bag",
+        "category":"Women",
+        "description":"best Women Bag for sell  bag for sell best women bag for sell thsk eskd ledkwd wkedlkwe wedko h thsk eskd ledkwd wkedlkwe ",
+        "price":500.0,
+        "color":"#d9a5ac",
+        "image":"assets/images/bag.jpeg",
+        "property":[
+            {"color":"red"},
+            {"size":"max"}
+        ]
+    }, {
+        "id":1,
+        "name":"Shoe",
+        "category":"Men",
+        "description":"men shoe for sell thsk eskd ledkwd wkedlkwe wedko best women bag for sell thsk eskd ledkwd wkedlkwe wedko h hfdw.",
+        "price":120.0,
+        "color":"#797677",
+        "image":"assets/images/shoe.png",
+        "property":[
+            {"color":"red"},
+            {"size":"max"}
+        ]
+    },
+    {
+        "id":2,
+        "name":"Bag",
+        "category":"Women",
+        "description":"best Women Bag for sell  bag for sell best women bag for sell thsk eskd ledkwd wkedlkwe wedko h thsk eskd ledkwd wkedlkwe ",
+        "price":500.0,
+        "color":"#d9a5ac",
+        "image":"assets/images/bag.jpeg",
+        "property":[
+            {"color":"red"},
+            {"size":"max"}
+        ]
+    }
+]
