@@ -21,7 +21,7 @@ class ProductDetailScreen extends StatelessWidget {
               preferredSize: const Size.fromHeight(63.0),
               child: ProductDetailTopAppBar(index),
             ),
-            body: ProductDetailsWidget()
+            body: ProductDetailsWidget(index: index)
             // ProductDetailBody(index, _scaffoldKey),
             );
       }

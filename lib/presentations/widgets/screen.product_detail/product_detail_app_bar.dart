@@ -14,39 +14,43 @@ class ProductDetailTopAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCubit, ProductState>(builder: ((context, state) {
-      state as ProductLoaded;
-      return AppBar(
-        // toolbarHeight: 300.0,
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: Text(
-          "product details",
-          style: TextStyle(color: Colors.black),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.grey),
-          onPressed: () {
-            BlocProvider.of<QuantityCubit>(context).resetQuantityState();
-            Navigator.of(context).pushNamed('/home');
-          },
-        ),
-        actions: [
-          BlocBuilder<CartCubit, CartState>(
-              buildWhen: (previous, current) => current != previous,
-              builder: (context, cartState) {
-                return Badge(
-                  value: (cartState.cart.length - 1).toString(),
-                  color: Color.fromARGB(255, 255, 0, 0),
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.shopping_cart,
-                      color: Colors.grey,
+      if (state is ProductLoaded) {
+        return AppBar(
+          // toolbarHeight: 300.0,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Text(
+            "product details",
+            style: TextStyle(color: Colors.black),
+          ),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back, color: Colors.grey),
+            onPressed: () {
+              BlocProvider.of<QuantityCubit>(context).resetQuantityState();
+              Navigator.of(context).pushNamed('/category');
+            },
+          ),
+          actions: [
+            BlocBuilder<CartCubit, CartState>(
+                buildWhen: (previous, current) => current != previous,
+                builder: (context, cartState) {
+                  return Badge(
+                    value: (cartState.cart.length - 1).toString(),
+                    color: Color.fromARGB(255, 255, 0, 0),
+                    child: IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.shopping_cart,
+                        color: Colors.grey,
+                      ),
                     ),
-                  ),
-                );
-              }),
-        ],
+                  );
+                }),
+          ],
+        );
+      }
+      return Center(
+        child: const CircularProgressIndicator(),
       );
     }));
   }

@@ -1,6 +1,7 @@
 import 'package:ecommerce_v3/logic/product/cart/cart_cubit.dart';
 import 'package:ecommerce_v3/logic/product/cart/quantity_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
+import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -21,22 +22,43 @@ class ProductQuantityCounter extends StatelessWidget {
           if (cartState.cart.containsKey(productState.product[index].id)) {
             size = cartState.cart[productState.product[index].id]!.quantity;
           }
-          return Row(children: <Widget>[
-            builtOutlinedButtonRemove(
-                icon: Icons.remove,
-                size: quantityState.quantity,
-                context: context),
-            Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text(
-                  size.toString(),
-                  style: Theme.of(context).textTheme.headline6,
-                )),
-            builtOutlinedButtonAdd(
-                icon: Icons.add,
-                size: quantityState.quantity,
-                context: context),
-          ]);
+          return Padding(
+            padding: const EdgeInsets.only(left: 20.0, right: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Quantity',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    ProductFavoriteButton(index: index, isLiked: false)
+                  ],
+                ),
+                Row(children: <Widget>[
+                  builtOutlinedButtonRemove(
+                      icon: Icons.remove,
+                      size: quantityState.quantity,
+                      context: context),
+                  Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        size.toString(),
+                        style: Theme.of(context).textTheme.headline6,
+                      )),
+                  builtOutlinedButtonAdd(
+                      icon: Icons.add,
+                      size: quantityState.quantity,
+                      context: context),
+                ]),
+              ],
+            ),
+          );
         });
       }));
     });
@@ -50,10 +72,15 @@ class ProductQuantityCounter extends StatelessWidget {
         width: 55,
         height: 32,
         child: OutlinedButton(
+            style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all(Colors.white)),
             onPressed: () {
               BlocProvider.of<QuantityCubit>(context).decreaseQuantityState();
             },
-            child: Icon(icon)));
+            child: Icon(
+              icon,
+              color: Colors.black,
+            )));
   }
 
   SizedBox builtOutlinedButtonAdd(
@@ -76,12 +103,18 @@ class ProductQuantityCounter extends StatelessWidget {
                 }
 
                 return OutlinedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.white)),
                     onPressed: () {
                       BlocProvider.of<QuantityCubit>(context)
                           .increaseQuantityState(
                               isInCart: isInCart, inCartSize: cartSize);
                     },
-                    child: Icon(icon));
+                    child: Icon(
+                      icon,
+                      color: Colors.black,
+                    ));
               },
             );
           },

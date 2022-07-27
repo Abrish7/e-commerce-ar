@@ -51,32 +51,33 @@ class _ProductWidgetState extends State<ProductWidget> {
         products = state.product;
       }
 
-      return state is ProductLoaded
-          ? ListView.separated(
-              controller: scrollController,
-              itemBuilder: ((context, index) {
-                if (index < products.length) {
-                  return RaisedButton(
-                      elevation: 0.5,
-                      color: Colors.white,
-                      onPressed: () {},
-                      child: ProductItem(index: index));
-                } else {
-                  Timer(Duration(milliseconds: 200), () {
-                    scrollController
-                        .jumpTo(scrollController.position.maxScrollExtent);
-                  });
-                  return _loadingIndicator();
-                }
-                // return _product(products[index], context);
-              }),
-              separatorBuilder: (context, index) {
-                return Divider(
+      return ListView.separated(
+          controller: scrollController,
+          itemBuilder: ((context, index) {
+            if (index < products.length) {
+              return RaisedButton(
+                  elevation: 0.5,
                   color: Colors.white,
-                );
-              },
-              itemCount: products.length + (isLoading ? 1 : 0))
-          : const Center(child: CircularProgressIndicator());
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed('/product_detail', arguments: index);
+                  },
+                  child: ProductItem(index: index));
+            } else {
+              Timer(Duration(milliseconds: 50), () {
+                scrollController
+                    .jumpTo(scrollController.position.maxScrollExtent);
+              });
+              return _loadingIndicator();
+            }
+            // return _product(products[index], context);
+          }),
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.white,
+            );
+          },
+          itemCount: products.length + (isLoading ? 1 : 0));
     });
   }
 

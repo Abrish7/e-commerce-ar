@@ -7,14 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class ProductFavoriteButton extends StatelessWidget {
   final bool isLiked;
   final int index;
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  // final GlobalKey<ScaffoldState> scaffoldKey;
 
-  const ProductFavoriteButton(
-      {Key? key,
-      required this.index,
-      required this.isLiked,
-      required this.scaffoldKey})
-      : super(key: key);
+  const ProductFavoriteButton({
+    Key? key,
+    required this.index,
+    required this.isLiked,
+    // required this.scaffoldKey
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -59,12 +59,12 @@ class ProductFavoriteButton extends StatelessWidget {
   }
 
   void buildSnackBar(ProductLoaded productState, String append, Color color) {
-    scaffoldKey.currentState!.showSnackBar(SnackBar(
-        duration: Duration(milliseconds: 1000),
-        backgroundColor: color,
-        content: Text(
-          "product ${productState.product[index].name} $append",
-          style: const TextStyle(color: Colors.white),
-        )));
+    // scaffoldKey.currentState!.showSnackBar(SnackBar(
+    //     duration: Duration(milliseconds: 1000),
+    //     backgroundColor: color,
+    //     content: Text(
+    //       "product ${productState.product[index].name} $append",
+    //       style: const TextStyle(color: Colors.white),
+    //     )));
   }
 }

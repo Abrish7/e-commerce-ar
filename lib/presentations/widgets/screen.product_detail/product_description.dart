@@ -15,10 +15,21 @@ class ProductDescription extends StatelessWidget {
     return BlocBuilder<ProductCubit, ProductState>(builder: ((context, state) {
       state as ProductLoaded;
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Text(
-          state.product[index].description,
-          style: const TextStyle(height: 1.5),
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: SingleChildScrollView(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Expanded(
+                child: Text(
+                  state.product[index].description,
+                  style: const TextStyle(height: 1.5),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 10,
+                ),
+              ),
+            ],
+          ),
         ),
       );
     }));

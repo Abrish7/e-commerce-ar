@@ -7,11 +7,11 @@ class CounterWithFavBtn extends StatelessWidget {
   const CounterWithFavBtn({
     Key? key,
     required this.index,
-    required this.scaffoldKey,
+    // required this.scaffoldKey,
   }) : super(key: key);
 
   final int index;
-  final GlobalKey<ScaffoldState> scaffoldKey;
+  // final GlobalKey<ScaffoldState> scaffoldKey;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class CounterWithFavBtn extends StatelessWidget {
         ProductFavoriteButton(
           index: index,
           isLiked: true,
-          scaffoldKey: scaffoldKey,
+          // scaffoldKey: scaffoldKey,
         )
       ],
     );

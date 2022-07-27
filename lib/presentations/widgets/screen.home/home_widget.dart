@@ -12,13 +12,13 @@ import '../../common/theme_helper.dart';
 class HomeWidget extends StatelessWidget {
   HomeWidget({Key? key}) : super(key: key);
 
-  late int currentIndex = 0;
-  final scrollController = ScrollController();
+  late int currentIndexHome = 0;
+  final scrollControllerHome = ScrollController();
 
-  void setupScrollController(context) {
-    scrollController.addListener(() {
-      if (scrollController.position.atEdge) {
-        if (scrollController.position.pixels != 0) {
+  void setupScrollControllerHome(context) {
+    scrollControllerHome.addListener(() {
+      if (scrollControllerHome.position.atEdge) {
+        if (scrollControllerHome.position.pixels != 0) {
           BlocProvider.of<ProductCubit>(context).loadProduct();
         }
       }
@@ -27,7 +27,7 @@ class HomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    setupScrollController(context);
+    setupScrollControllerHome(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -185,7 +185,7 @@ class HomeWidget extends StatelessWidget {
       }
 
       return ListView.separated(
-          controller: scrollController,
+          controller: scrollControllerHome,
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
             if (index < products.length) {
@@ -208,8 +208,8 @@ class HomeWidget extends StatelessWidget {
                   ));
             } else {
               Timer(Duration(milliseconds: 200), () {
-                scrollController
-                    .jumpTo(scrollController.position.maxScrollExtent);
+                scrollControllerHome
+                    .jumpTo(scrollControllerHome.position.maxScrollExtent);
               });
               return _loadingIndicator();
             }

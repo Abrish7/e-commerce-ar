@@ -34,7 +34,9 @@ class HomeTopAppBar extends StatelessWidget {
           ),
         ),
         IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed('/cart');
+          },
           icon: const Icon(
             Icons.shopping_cart,
             color: Colors.black,

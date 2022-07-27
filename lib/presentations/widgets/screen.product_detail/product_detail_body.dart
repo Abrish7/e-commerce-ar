@@ -38,12 +38,12 @@ class ProductDetailBody extends StatelessWidget {
                       ProductDescription(index: index),
                       CounterWithFavBtn(
                         index: index,
-                        scaffoldKey: scaffoldKey,
+                        // scaffoldKey: scaffoldKey,
                       ),
-                      ProductAddToCartAndARBtn(
-                        index: index,
-                        scaffoldKey: scaffoldKey,
-                      )
+                      // ProductAddToCartAndARBtn(
+                      //   index: index,
+                      //   scaffoldKey: scaffoldKey,
+                      // )
                     ],
                   ),
                 ),
