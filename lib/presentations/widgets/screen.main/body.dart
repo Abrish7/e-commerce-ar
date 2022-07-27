@@ -1,12 +1,9 @@
 import 'package:ecommerce_v3/logic/home/bottom_app_bar_cubit.dart';
-import 'package:ecommerce_v3/presentations/screens/home_screen.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.main/pages/favorite_list.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.main/pages/order_list.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.main/pages/product_list.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.main/pages/setting.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.main/pages/shopping_cart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MainBody extends StatelessWidget {

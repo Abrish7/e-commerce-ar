@@ -1,11 +1,7 @@
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-
-import '../../common/theme_helper.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({Key? key, required this.index}) : super(key: key);

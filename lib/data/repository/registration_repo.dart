@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:ecommerce_v3/data/model/product_model.dart';
 import 'package:ecommerce_v3/data/provider/registration_api.dart';
 
 class RegistrationRepository {

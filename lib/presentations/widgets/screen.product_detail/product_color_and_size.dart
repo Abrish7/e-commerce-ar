@@ -1,5 +1,4 @@
 import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_dot.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_dot.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

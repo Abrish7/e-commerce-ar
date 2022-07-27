@@ -1,9 +1,6 @@
 import 'package:ecommerce_v3/presentations/widgets/screen.cart/cart_quantity_counter.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_quantity_counter.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({Key? key}) : super(key: key);

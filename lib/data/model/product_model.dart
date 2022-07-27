@@ -1,6 +1,3 @@
-import 'package:equatable/equatable.dart';
-import 'package:flutter/widgets.dart';
-
 class Product {
   final String id;
   final String name;

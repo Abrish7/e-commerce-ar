@@ -1,7 +1,6 @@
 import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_title_with_image.dart';
 import 'package:flutter/material.dart';
 
-import 'product_add_to_cart_ar_btn.dart';
 import 'product_color_and_size.dart';
 import 'product_counter_with_fav_btn.dart';
 import 'product_description.dart';

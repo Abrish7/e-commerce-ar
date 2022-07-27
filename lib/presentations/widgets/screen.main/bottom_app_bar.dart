@@ -2,8 +2,6 @@ import 'package:ecommerce_v3/logic/home/bottom_app_bar_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../logic/product/product_cubit.dart';
-
 class BottomAppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

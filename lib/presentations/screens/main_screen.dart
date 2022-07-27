@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../data/model/user_model.dart';
-import '../../logic/auth/bloc/auth_bloc.dart';
 import '../../logic/auth/cubit/user_cubit.dart';
 
 class MainScreen extends StatefulWidget {

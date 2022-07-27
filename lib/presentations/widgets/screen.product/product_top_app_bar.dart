@@ -2,7 +2,6 @@ import 'package:ecommerce_v3/logic/product/cart/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/badge.dart';
-import 'bottom_cart_sheet.dart';
 
 class ProductTopAppBar extends StatelessWidget {
   const ProductTopAppBar({Key? key}) : super(key: key);

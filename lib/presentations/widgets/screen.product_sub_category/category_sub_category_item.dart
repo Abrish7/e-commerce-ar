@@ -1,12 +1,7 @@
 import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
-import 'package:ecommerce_v3/presentations/common/skeloton.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.product_sub_category/sub_category_skeloten.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../logic/product/sub_category/sub_category_cubit.dart';
 

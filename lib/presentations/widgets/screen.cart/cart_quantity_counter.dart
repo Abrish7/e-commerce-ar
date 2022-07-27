@@ -1,7 +1,4 @@
-import 'package:ecommerce_v3/logic/product/cart/cart_cubit.dart';
 import 'package:ecommerce_v3/logic/product/cart/quantity_cubit.dart';
-import 'package:ecommerce_v3/logic/product/product_cubit.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

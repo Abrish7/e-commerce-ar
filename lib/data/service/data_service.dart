@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:ecommerce_v3/data/model/product_sub_category.dart';
 import 'package:flutter/services.dart';
 
 import '../model/product_category.dart';

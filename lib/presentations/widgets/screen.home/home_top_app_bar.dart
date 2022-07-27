@@ -1,4 +1,3 @@
-import 'package:ecommerce_v3/presentations/widgets/screen.home/filter_type.dart';
 import 'package:flutter/material.dart';
 
 class HomeTopAppBar extends StatelessWidget {

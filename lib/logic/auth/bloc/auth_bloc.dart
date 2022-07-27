@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:ecommerce_v3/data/repository/auth_repo.dart';
 import 'package:ecommerce_v3/data/repository/registration_repo.dart';

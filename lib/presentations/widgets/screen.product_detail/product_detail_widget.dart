@@ -1,14 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_add_to_cart_ar_btn.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_counter_with_fav_btn.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_description.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_favorite_button.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_quantity_counter.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

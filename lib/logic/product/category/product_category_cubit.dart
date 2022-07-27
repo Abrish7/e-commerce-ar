@@ -3,7 +3,6 @@ import 'package:ecommerce_v3/data/repository/product_category_repo.dart';
 import 'package:equatable/equatable.dart';
 
 import '../../../data/model/product_category.dart';
-import '../../../data/model/product_sub_category.dart';
 import '../../../data/repository/product_sub_category_repo.dart';
 
 part 'product_category_state.dart';

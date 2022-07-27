@@ -1,12 +1,5 @@
-import 'package:ecommerce_v3/presentations/widgets/screen.profile/profile_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:settings_ui/settings_ui.dart';
-
-import '../../../logic/auth/cubit/user_cubit.dart';
 
 class SettingWidget extends StatelessWidget {
   const SettingWidget({Key? key}) : super(key: key);

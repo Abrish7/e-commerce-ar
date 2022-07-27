@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'package:ecommerce_v3/data/model/user_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:ecommerce_v3/data/model/auth_model.dart';
-
 import '../provider/auth_api.dart';
 
 class AuthRepository {

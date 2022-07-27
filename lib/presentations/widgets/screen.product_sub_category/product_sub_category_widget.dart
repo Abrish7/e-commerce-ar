@@ -1,13 +1,8 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
 import 'package:ecommerce_v3/logic/product/sub_category/sub_category_cubit.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.category/category_item.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.product_sub_category/sub_category_skeloten.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import 'category_sub_category_item.dart';
 
 class ProductSubCategoryWidget extends StatelessWidget {
   const ProductSubCategoryWidget({Key? key}) : super(key: key);

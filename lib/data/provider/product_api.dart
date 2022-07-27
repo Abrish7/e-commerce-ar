@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:ecommerce_v3/data/model/product_model.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 
 class ProductApi {
