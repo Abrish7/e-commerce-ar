@@ -1,14 +1,33 @@
+import 'dart:async';
+
+import 'package:ecommerce_v3/data/model/product_model.dart';
+import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.home/filter_type.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.home/item.dart';
 import 'package:ecommerce_v3/presentations/common/skeloton.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/theme_helper.dart';
 
 class HomeWidget extends StatelessWidget {
-  const HomeWidget({Key? key}) : super(key: key);
+  HomeWidget({Key? key}) : super(key: key);
+
+  late int currentIndex = 0;
+  final scrollController = ScrollController();
+
+  void setupScrollController(context) {
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge) {
+        if (scrollController.position.pixels != 0) {
+          BlocProvider.of<ProductCubit>(context).loadProduct();
+        }
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    setupScrollController(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -29,24 +48,7 @@ class HomeWidget extends StatelessWidget {
           SizedBox(
             height: 300,
             width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.all(2),
-                    child: RaisedButton(
-                      elevation: 0.5,
-                      child: const ListItem(),
-                      onPressed: () {
-                        Navigator.of(context)
-                            .pushNamed('/product_detail', arguments: index);
-                      },
-                      color: Colors.white,
-                    ),
-                  );
-                }),
+            child: _productList(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -54,7 +56,7 @@ class HomeWidget extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: Text(
-                  'Most viewed item ->',
+                  'Recommended ->',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -72,7 +74,9 @@ class HomeWidget extends StatelessWidget {
                     margin: EdgeInsets.all(2),
                     child: RaisedButton(
                       elevation: 0.5,
-                      child: const ListItem(),
+                      child: const ListItem(
+                        index: 0,
+                      ),
                       onPressed: () {},
                       color: Colors.white,
                     ),
@@ -161,6 +165,68 @@ class HomeWidget extends StatelessWidget {
             'Search', '', '', false, const Icon(Icons.search)),
         onChanged: (value) {},
       ),
+    );
+  }
+
+  Widget _productList() {
+    return BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
+      if (state is ProductLoading && state.isFirstFetch) {
+        return _loadingIndicator();
+      }
+
+      List<Product> products = [];
+      bool isLoading = false;
+
+      if (state is ProductLoading) {
+        products = state.oldProducts;
+        isLoading = true;
+      } else if (state is ProductLoaded) {
+        products = state.product;
+      }
+
+      return ListView.separated(
+          controller: scrollController,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: ((context, index) {
+            if (index < products.length) {
+              return RaisedButton(
+                  elevation: 1,
+                  color: Colors.grey[100],
+                  onPressed: () {},
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ListItem(index: index),
+                        ],
+                      ),
+                    ],
+                  ));
+            } else {
+              Timer(Duration(milliseconds: 200), () {
+                scrollController
+                    .jumpTo(scrollController.position.maxScrollExtent);
+              });
+              return _loadingIndicator();
+            }
+            // return _product(products[index], context);
+          }),
+          separatorBuilder: (context, index) {
+            return Divider(
+              color: Colors.white,
+            );
+          },
+          itemCount: products.length + (isLoading ? 1 : 0));
+    });
+  }
+
+  Widget _loadingIndicator() {
+    return const Center(
+      child: CircularProgressIndicator(),
     );
   }
 }

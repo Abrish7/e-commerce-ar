@@ -62,7 +62,7 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                         return FlatButton(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10)),
-                            color: productState.product[index].color,
+                            // color: productState.product[index].color,
                             onPressed: () {
                               if (cartState.cart.containsKey(
                                   productState.product[index].id)) {
@@ -71,8 +71,7 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                               } else {
                                 BlocProvider.of<CartCubit>(context)
                                     .setCartState(Cart(
-                                        productId:
-                                            productState.product[index].id,
+                                        productId: 10,
                                         quantity: quantityState.quantity));
                                 buildSnackBar(productState, 'added to cart.',
                                     Colors.blue);

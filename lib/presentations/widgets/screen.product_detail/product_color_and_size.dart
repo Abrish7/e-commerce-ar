@@ -29,7 +29,8 @@ class ProductColorAndSize extends StatelessWidget {
                     Row(
                       children: [
                         ColorDot(
-                          color: state.product[index].color,
+                          // color: state.product[index].color,
+                          color: Colors.blue,
                           isSelected: true,
                         ),
                         const ColorDot(

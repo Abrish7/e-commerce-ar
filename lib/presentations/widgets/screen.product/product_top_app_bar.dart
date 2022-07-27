@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/badge.dart';
 import 'bottom_cart_sheet.dart';
 
-class TopAppBar extends StatelessWidget {
-  const TopAppBar({Key? key}) : super(key: key);
+class ProductTopAppBar extends StatelessWidget {
+  const ProductTopAppBar({Key? key}) : super(key: key);
   @override
   // ignore: todo
   // TODO: implement preferredSize
@@ -18,7 +18,7 @@ class TopAppBar extends StatelessWidget {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.grey),
         onPressed: () {
-          Navigator.of(context).pushNamed('/main');
+          Navigator.of(context).pushNamed('/subCategory');
         },
       ),
       actions: [

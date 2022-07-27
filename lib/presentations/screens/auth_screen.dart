@@ -25,6 +25,7 @@ class _AuthScreenState extends State<AuthScreen> {
   _isLoggedIn() async {
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     SharedPreferences profs = await _prefs;
+
     print('auth');
     if (profs.getString("token")!.isNotEmpty) {
       BlocProvider.of<AuthBloc>(context)

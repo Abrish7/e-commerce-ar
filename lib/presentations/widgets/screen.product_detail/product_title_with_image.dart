@@ -23,7 +23,7 @@ class ProductTitleWithImage extends StatelessWidget {
               children: <Widget>[
                 Expanded(
                     child: Image.asset(
-                  state.product[index].image,
+                  state.product[index].image[0],
                 ))
               ],
             )

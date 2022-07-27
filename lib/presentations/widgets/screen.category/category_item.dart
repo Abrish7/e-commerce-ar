@@ -13,34 +13,6 @@ class CategoryItem extends StatelessWidget {
   final int index;
   List<Product> list = [];
 
-  void addProduct() {
-    list.add(new Product(
-        id: 0,
-        name: "name",
-        color: Colors.white,
-        category: "category",
-        property: [],
-        description: 'description',
-        image: "image",
-        price: 10.0));
-
-    list.add(new Product(
-        id: 0,
-        name: "name",
-        color: Colors.white,
-        category: "category",
-        property: [],
-        description: 'description',
-        image: "image",
-        price: 10.0));
-
-    ListView.builder(
-        itemCount: list.length,
-        itemBuilder: (context, index) {
-          return Text(list[index].name);
-        });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(

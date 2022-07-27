@@ -2,52 +2,54 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/widgets.dart';
 
 class Product {
-  final int id;
+  final String id;
   final String name;
-  final Color color;
-  final String category;
+  // final Color color;
+  // final List<String> category;
   final List<dynamic> property;
+  final int quantity;
   final String description;
-  final String image;
-  final double price;
+  final List<dynamic> image;
+  final List<dynamic> tag;
+  final dynamic price;
 
   const Product(
       {required this.id,
       required this.name,
-      required this.color,
-      required this.category,
+      // required this.color,
+      // required this.category,
       required this.property,
+      required this.quantity,
       required this.description,
       required this.image,
+      required this.tag,
       required this.price});
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-        id: json['id'],
+        id: json['_id'],
         name: json['name'],
-        color: Color(
-            int.parse(json['color'].substring(1, 7), radix: 16) + 0xFF000000),
-        category: json['category'],
-        property: json['property'],
+        // color: json['color'],
+        // category: json['category'],
+        property: json['attributes'],
+        quantity: json['quantity'],
         description: json['description'],
-        image: json['image'],
-        price: json['price']);
+        image: json['images'],
+        price: json['price'],
+        tag: json['tags']);
   }
 }
 
 class Property {
-  late String color;
-  late String size;
-  Property({required this.color, required this.size});
+  late String name;
+  Property({required this.name});
   Property.fromJson(Map<String, dynamic> json) {
-    color = json['color'];
-    size = json['size'];
+    name = json['name'];
   }
   Map<String, dynamic> toJson() {
     // ignore: prefer_collection_literals
     final Map<String, dynamic> data = Map<String, dynamic>();
-    data['color'] = color;
-    data['size'] = size;
+    data['name'] = name;
     return data;
   }
 }

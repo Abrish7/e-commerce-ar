@@ -1,8 +1,4 @@
-import 'package:ecommerce_v3/presentations/widgets/screen.product/product_item.dart';
-import 'package:ecommerce_v3/presentations/widgets/screen.product/product_list.dart';
 import 'package:flutter/material.dart';
-import '../../../data/model/product_sub_category.dart';
-import '../../../data/provider/product_category_api.dart';
 
 class FilterType extends StatefulWidget {
   const FilterType({Key? key}) : super(key: key);

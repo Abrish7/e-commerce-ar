@@ -31,7 +31,9 @@ class ProductSubCategoryWidget extends StatelessWidget {
                           ? RaisedButton(
                               elevation: .5,
                               color: Colors.white,
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/product');
+                              },
                               child: ListTile(
                                 title: Text(
                                     state.subCategory[index].subCategory

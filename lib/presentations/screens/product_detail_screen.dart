@@ -13,17 +13,21 @@ class ProductDetailScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCubit, ProductState>(builder: ((context, state) {
-      state as ProductLoaded;
-      return Scaffold(
-          key: _scaffoldKey,
-          backgroundColor: Colors.white,
-          appBar: PreferredSize(
-            preferredSize: const Size.fromHeight(63.0),
-            child: ProductDetailTopAppBar(index),
-          ),
-          body: ProductDetailsWidget()
-          // ProductDetailBody(index, _scaffoldKey),
-          );
+      if (state is ProductLoaded) {
+        return Scaffold(
+            key: _scaffoldKey,
+            backgroundColor: Colors.white,
+            appBar: PreferredSize(
+              preferredSize: const Size.fromHeight(63.0),
+              child: ProductDetailTopAppBar(index),
+            ),
+            body: ProductDetailsWidget()
+            // ProductDetailBody(index, _scaffoldKey),
+            );
+      }
+      return const Center(
+        child: CircularProgressIndicator(),
+      );
     }));
   }
 }

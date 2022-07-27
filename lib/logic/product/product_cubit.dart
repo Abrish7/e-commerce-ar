@@ -9,18 +9,26 @@ import 'package:equatable/equatable.dart';
 part 'product_state.dart';
 
 class ProductCubit extends Cubit<ProductState> {
-  ProductCubit() : super(ProductInitial());
-  ProductRepo repository = ProductRepo();
+  ProductCubit(this.repository) : super(ProductInitial());
 
-  void setProductLoaded() async {
-    List<Product> data = await ProductApi().getProduct();
-    // Timer(const Duration(milliseconds: 3000), () {
-    // });
-    if (data.isNotEmpty) {
-      emit(ProductLoaded(product: repository.getProduct()));
+  int page = 1;
+  final ProductRepo repository;
+
+  void loadProduct() {
+    print('loading product...');
+    if (state is ProductLoading) return;
+    final currentState = state;
+    var oldProduct = <Product>[];
+    if (currentState is ProductLoaded) {
+      oldProduct = currentState.product;
     }
-    if (data.isEmpty) {
-      emit(ProductLoading());
-    }
+    emit(ProductLoading(oldProducts: oldProduct, isFirstFetch: page == 1));
+
+    repository.fetchProduct(page: page).then((newProduct) {
+      page++;
+      final products = (state as ProductLoading).oldProducts;
+      products.addAll(newProduct);
+      emit(ProductLoaded(product: products));
+    });
   }
 }

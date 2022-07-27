@@ -2,18 +2,11 @@ import '../model/product_model.dart';
 import '../provider/product_api.dart';
 
 class ProductRepo {
-  late final ProductApi _productApi = ProductApi();
-
-  List<Product> getProduct() {
-    List<Product> product = [];
-    _productApi.getProduct().then((value) {
-      if (value.isNotEmpty) {
-        value.forEach((element) {
-          product.add(element);
-        });
-      }
-    });
-
-    return product;
+  final ProductApi productApi;
+  ProductRepo({required this.productApi});
+  Future<List<Product>> fetchProduct({required int page}) async {
+    final products = await productApi.getProduct(page: page);
+    print('from repo no = ' + products.length.toString());
+    return products.map((e) => Product.fromJson(e)).toList();
   }
 }

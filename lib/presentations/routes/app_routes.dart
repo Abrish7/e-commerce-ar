@@ -1,3 +1,5 @@
+import 'package:ecommerce_v3/data/provider/product_api.dart';
+import 'package:ecommerce_v3/data/repository/product_repo.dart';
 import 'package:ecommerce_v3/logic/auth/bloc/auth_bloc.dart';
 import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
 import 'package:ecommerce_v3/logic/home/bottom_app_bar_cubit.dart';
@@ -29,7 +31,8 @@ class AppRoutes {
       ProductCategoryCubit();
   static final SubCategoryCubit _subCategoryCubit = SubCategoryCubit();
   static final ProductIndexCubit _ProductIndexCubit = ProductIndexCubit();
-  static final ProductCubit _ProductCubit = ProductCubit();
+  static final ProductCubit _ProductCubit =
+      ProductCubit(ProductRepo(productApi: ProductApi()));
   static final CartCubit _cartCubit = CartCubit();
   static final QuantityCubit _quantityCubit = QuantityCubit();
   static final FavoriteCubit _favCubit = FavoriteCubit();
@@ -48,8 +51,7 @@ class AppRoutes {
                     BlocProvider.value(
                         value: _ProductCategoryCubit
                           ..setProductCategoryLoadedState()),
-                    BlocProvider.value(
-                        value: _ProductCubit..setProductLoaded()),
+                    BlocProvider.value(value: _ProductCubit),
                     BlocProvider.value(value: _cartCubit),
                     BlocProvider.value(value: _bottomAppBarCubit),
                     BlocProvider.value(value: _userCubit),
@@ -66,8 +68,7 @@ class AppRoutes {
                     BlocProvider.value(
                         value: _ProductCategoryCubit
                           ..setProductCategoryLoadedState()),
-                    BlocProvider.value(
-                        value: _ProductCubit..setProductLoaded()),
+                    BlocProvider.value(value: _ProductCubit),
                     BlocProvider.value(value: _cartCubit),
                     BlocProvider.value(value: _bottomAppBarCubit),
                     BlocProvider.value(value: _userCubit),
@@ -82,8 +83,7 @@ class AppRoutes {
                     BlocProvider.value(
                         value: _ProductCategoryCubit
                           ..setProductCategoryLoadedState()),
-                    BlocProvider.value(
-                        value: _ProductCubit..setProductLoaded()),
+                    BlocProvider.value(value: _ProductCubit),
                     BlocProvider.value(value: _authBloc),
                     BlocProvider.value(value: _cartCubit),
                     BlocProvider.value(value: _bottomAppBarCubit),
@@ -103,8 +103,7 @@ class AppRoutes {
                     BlocProvider.value(
                         value: _ProductCategoryCubit
                           ..setProductCategoryLoadedState()),
-                    BlocProvider.value(
-                        value: _ProductCubit..setProductLoaded()),
+                    BlocProvider.value(value: _ProductCubit),
                     BlocProvider.value(value: _cartCubit),
                     BlocProvider.value(value: _quantityCubit),
                     BlocProvider.value(value: _bottomAppBarCubit),
@@ -120,7 +119,7 @@ class AppRoutes {
               BlocProvider.value(
                   value: _ProductCategoryCubit
                     ..setProductCategoryLoadedState()),
-              BlocProvider.value(value: _ProductCubit..setProductLoaded()),
+              BlocProvider.value(value: _ProductCubit),
               BlocProvider.value(value: _cartCubit),
               BlocProvider.value(value: _quantityCubit),
               BlocProvider.value(value: _bottomAppBarCubit),
@@ -145,7 +144,7 @@ class AppRoutes {
               BlocProvider.value(
                   value: _ProductCategoryCubit
                     ..setProductCategoryLoadedState()),
-              BlocProvider.value(value: _ProductCubit..setProductLoaded()),
+              BlocProvider.value(value: _ProductCubit),
               BlocProvider.value(value: _cartCubit),
               BlocProvider.value(value: _bottomAppBarCubit),
               BlocProvider.value(value: _userCubit),
@@ -161,8 +160,7 @@ class AppRoutes {
                     BlocProvider.value(
                         value: _ProductCategoryCubit
                           ..setProductCategoryLoadedState()),
-                    BlocProvider.value(
-                        value: _ProductCubit..setProductLoaded()),
+                    BlocProvider.value(value: _ProductCubit),
                     BlocProvider.value(value: _cartCubit),
                     BlocProvider.value(value: _quantityCubit),
                     BlocProvider.value(value: _bottomAppBarCubit),
@@ -175,10 +173,7 @@ class AppRoutes {
         return MaterialPageRoute(
             builder: (_) => MultiBlocProvider(
                   providers: [
-                    BlocProvider.value(
-                        value: _ProductCubit..setProductLoaded()),
-                    BlocProvider.value(
-                        value: _ProductCubit..setProductLoaded()),
+                    BlocProvider.value(value: _ProductCubit),
                     BlocProvider.value(value: _cartCubit),
                     BlocProvider.value(value: _favCubit),
                     BlocProvider.value(value: _quantityCubit),

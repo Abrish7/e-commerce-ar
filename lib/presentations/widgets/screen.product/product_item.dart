@@ -1,58 +1,106 @@
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class ProductItem extends StatefulWidget {
-  int index;
-  ProductItem(this.index, {Key? key}) : super(key: key);
+import '../../common/theme_helper.dart';
 
-  @override
-  State<ProductItem> createState() => _ProductItemState(index);
-}
-
-class _ProductItemState extends State<ProductItem> {
-  int index;
-
-  _ProductItemState(this.index);
+class ProductItem extends StatelessWidget {
+  const ProductItem({Key? key, required this.index}) : super(key: key);
+  final int index;
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductCubit, ProductState>(builder: (context, state) {
-      if (state is ProductLoaded) {
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context)
-                .pushNamed('/product_detail', arguments: index);
-          },
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8.0),
-                decoration: BoxDecoration(
-                  color: state.product[index].color,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Image.asset(state.product[index].image),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 2),
-                child: Text(
-                  state.product[index].name.toString(),
-                  style: const TextStyle(color: Colors.black54),
-                ),
-              ),
-              Text(
-                state.product[index].price.toString(),
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
-        );
-      } else {
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      }
-    });
+    return Container(
+      // padding: EdgeInsets.all(5),
+
+      child: BlocBuilder<ProductCubit, ProductState>(
+        builder: (context, state) {
+          if (state is ProductLoaded) {
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _productImage(state.product[index].image[0].toString()),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 200,
+                      padding: const EdgeInsets.only(left: 10.0, top: 5),
+                      child: Text(
+                        state.product[index].name,
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                    Container(
+                      width: 200,
+                      padding: const EdgeInsets.only(left: 10.0),
+                      // margin: EdgeInsets.all(5),
+                      child: Text(
+                        state.product[index].description,
+                        style: TextStyle(),
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        textDirection: TextDirection.ltr,
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 10.0, top: 5),
+                      child: const Text(
+                        'ET 100.00',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                    RatingBar.builder(
+                      itemSize: 20,
+                      glowRadius: 5,
+                      initialRating: 1,
+                      minRating: 2,
+                      glow: true,
+                      direction: Axis.horizontal,
+                      allowHalfRating: true,
+                      itemCount: 5,
+                      itemPadding: const EdgeInsets.symmetric(
+                          horizontal: 4.0, vertical: 5),
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                        size: 5,
+                      ),
+                      onRatingUpdate: (rating) {
+                        print(rating);
+                      },
+                    ),
+                  ],
+                )
+              ],
+            );
+          }
+          return Container();
+        },
+      ),
+    );
+  }
+
+  _productImage(image) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 8.0, left: 8.0),
+      child: Container(
+        height: 120,
+        width: 150,
+        decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(5))),
+        child: Image.network(image),
+      ),
+    );
   }
 }

@@ -38,16 +38,14 @@ class ProductFavoriteButton extends StatelessWidget {
                 onTap: (() {
                   if (isLiked) {
                     BlocProvider.of<FavoriteCubit>(context)
-                        .removeFavoriteProduct(productState.product[index].id);
+                        .removeFavoriteProduct(10);
                     buildSnackBar(productState, " removed from favorite list.",
                         Colors.red);
                   } else {
                     buildSnackBar(
                         productState, " add to favorite list.", Colors.blue);
                     BlocProvider.of<FavoriteCubit>(context).addFavoriteProduct(
-                        Favorite(
-                            isFav: isLiked,
-                            productId: productState.product[index].id));
+                        Favorite(isFav: isLiked, productId: 10));
                   }
                 }),
                 child: Icon(
