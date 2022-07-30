@@ -70,6 +70,7 @@ class SignInSubmitted extends AuthEvent {
   List<Object?> get props => [];
 }
 
+// ignore: must_be_immutable
 class IsAlreadyLoggedIn extends AuthEvent {
   bool isUserLoggedIn;
   IsAlreadyLoggedIn({required this.isUserLoggedIn});
@@ -92,6 +93,5 @@ class UserLoaded extends AuthEvent {
 
   UserLoaded({required this.user});
   @override
-  // TODO: implement props
-  List<Object?> get props => throw UnimplementedError();
+  List<Object?> get props => [];
 }

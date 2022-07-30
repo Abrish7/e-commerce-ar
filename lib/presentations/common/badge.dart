@@ -23,6 +23,7 @@ class Badge extends StatelessWidget {
               padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
+                  // ignore: deprecated_member_use, unnecessary_null_comparison
                   color: color != null ? color : Theme.of(context).accentColor),
               constraints: const BoxConstraints(maxWidth: 16, minHeight: 16),
               child: Text(

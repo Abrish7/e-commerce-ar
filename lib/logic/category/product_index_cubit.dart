@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
 import 'package:equatable/equatable.dart';
+
+import 'product_category_cubit.dart';
 
 part 'product_index_state.dart';
 

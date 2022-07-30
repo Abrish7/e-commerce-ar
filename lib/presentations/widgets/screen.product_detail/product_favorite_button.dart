@@ -1,8 +1,9 @@
 import 'package:ecommerce_v3/data/model/favorite_model.dart';
-import 'package:ecommerce_v3/logic/product/cart/favorite_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../logic/cart/favorite_cubit.dart';
 
 class ProductFavoriteButton extends StatelessWidget {
   final bool isLiked;

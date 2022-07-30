@@ -1,9 +1,9 @@
-import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.product_sub_category/sub_category_skeloten.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../logic/product/sub_category/sub_category_cubit.dart';
+import '../../../logic/category/product_category_cubit.dart';
+import '../../../logic/sub_category/sub_category_cubit.dart';
 
 class ProductSubCategoryItem extends StatelessWidget {
   ProductSubCategoryItem({Key? key, required this.index}) : super(key: key);

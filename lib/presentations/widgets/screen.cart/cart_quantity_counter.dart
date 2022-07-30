@@ -1,10 +1,11 @@
-import 'package:ecommerce_v3/logic/product/cart/quantity_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartQuantityCounter extends StatelessWidget {
-  const CartQuantityCounter({Key? key, required this.index}) : super(key: key);
+  const CartQuantityCounter(
+      {Key? key, required this.index, required this.cartId})
+      : super(key: key);
   final int index;
+  final String cartId;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -14,19 +15,6 @@ class CartQuantityCounter extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                'Quantity',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400),
-              ),
-              // ProductFavoriteButton(index: index, isLiked: false)
-            ],
-          ),
           Row(children: <Widget>[
             builtOutlinedButtonRemove(
                 icon: Icons.remove, size: 1, context: context),
@@ -54,7 +42,8 @@ class CartQuantityCounter extends StatelessWidget {
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white)),
             onPressed: () {
-              BlocProvider.of<QuantityCubit>(context).decreaseQuantityState();
+              // BlocProvider.of<QuantityCubit>(context).decreaseQuantityState();
+              print('counter -- : ... ' + index.toString());
             },
             child: Icon(
               icon,
@@ -72,7 +61,9 @@ class CartQuantityCounter extends StatelessWidget {
         child: OutlinedButton(
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white)),
-            onPressed: () {},
+            onPressed: () {
+              print('counter ++ : ... ' + index.toString());
+            },
             child: Icon(
               icon,
               color: Colors.black,

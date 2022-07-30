@@ -1,7 +1,6 @@
-import 'package:ecommerce_v3/logic/product/cart/cart_cubit.dart';
+import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../common/badge.dart';
 
 class CartTopAppBar extends StatelessWidget {
   const CartTopAppBar({Key? key}) : super(key: key);
@@ -34,17 +33,18 @@ class CartTopAppBar extends StatelessWidget {
         BlocBuilder<CartCubit, CartState>(
           buildWhen: (previous, current) => current != previous,
           builder: (context, cartState) {
-            return Badge(
-              value: (cartState.cart.length - 1).toString(),
-              color: const Color.fromARGB(255, 232, 7, 7),
-              child: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.black,
-                ),
-              ),
-            );
+            return Container();
+            // return Badge(
+            //   value: (cartState.cart.length - 1).toString(),
+            //   color: const Color.fromARGB(255, 232, 7, 7),
+            //   child: IconButton(
+            //     onPressed: () {},
+            //     icon: const Icon(
+            //       Icons.shopping_cart,
+            //       color: Colors.black,
+            //     ),
+            //   ),
+            // );
           },
         )
       ],

@@ -1,9 +1,10 @@
-import 'package:ecommerce_v3/logic/product/cart/cart_cubit.dart';
-import 'package:ecommerce_v3/logic/product/cart/quantity_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.product_detail/product_favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../logic/cart/load_cart/cart_cubit.dart';
+import '../../../logic/cart/quantity_cubit.dart';
 
 class ProductQuantityCounter extends StatelessWidget {
   const ProductQuantityCounter({Key? key, required this.index})
@@ -19,9 +20,9 @@ class ProductQuantityCounter extends StatelessWidget {
         return BlocBuilder<CartCubit, CartState>(builder: (context, cartState) {
           int size = quantityState.quantity;
 
-          if (cartState.cart.containsKey(productState.product[index].id)) {
-            size = cartState.cart[productState.product[index].id]!.quantity;
-          }
+          // if (cartState.cart.containsKey(productState.product[index].id)) {
+          //   size = cartState.cart[productState.product[index].id]!.quantity;
+          // }
           return Padding(
             padding: const EdgeInsets.only(left: 20.0, right: 20),
             child: Column(
@@ -71,16 +72,32 @@ class ProductQuantityCounter extends StatelessWidget {
     return SizedBox(
         width: 55,
         height: 32,
-        child: OutlinedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.white)),
-            onPressed: () {
-              BlocProvider.of<QuantityCubit>(context).decreaseQuantityState();
-            },
-            child: Icon(
-              icon,
-              color: Colors.black,
-            )));
+        child: BlocBuilder<ProductCubit, ProductState>(
+          builder: (context, productState) {
+            if (productState is ProductLoaded) {
+              return BlocBuilder<QuantityCubit, QuantityState>(
+                builder: (context, quantityState) {
+                  return OutlinedButton(
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
+                      onPressed: () {
+                        BlocProvider.of<QuantityCubit>(context)
+                            .decreaseQuantityState(
+                                quantity: quantityState.quantity,
+                                size: productState.product[index].quantity);
+                      },
+                      child: Icon(
+                        icon,
+                        color: Colors.black,
+                      ));
+                },
+              );
+            } else {
+              return Container();
+            }
+          },
+        ));
   }
 
   SizedBox builtOutlinedButtonAdd(
@@ -93,15 +110,8 @@ class ProductQuantityCounter extends StatelessWidget {
         child: BlocBuilder<ProductCubit, ProductState>(
           builder: (context, productState) {
             productState as ProductLoaded;
-            return BlocBuilder<CartCubit, CartState>(
-              builder: (context, state) {
-                bool isInCart = false;
-                int cartSize = 0;
-                if (state.cart.containsKey(productState.product[index].id)) {
-                  isInCart = true;
-                  cartSize = 2;
-                }
-
+            return BlocBuilder<QuantityCubit, QuantityState>(
+              builder: (context, quantityState) {
                 return OutlinedButton(
                     style: ButtonStyle(
                         backgroundColor:
@@ -109,7 +119,8 @@ class ProductQuantityCounter extends StatelessWidget {
                     onPressed: () {
                       BlocProvider.of<QuantityCubit>(context)
                           .increaseQuantityState(
-                              isInCart: isInCart, inCartSize: cartSize);
+                              quantity: quantityState.quantity,
+                              size: productState.product[index].quantity);
                     },
                     child: Icon(
                       icon,

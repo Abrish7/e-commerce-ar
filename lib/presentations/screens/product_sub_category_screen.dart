@@ -4,11 +4,12 @@ import '../widgets/screen.product_sub_category/product_sub_category_top_app_bar.
 import '../widgets/screen.product_sub_category/product_sub_category_widget.dart';
 
 class ProductSubCategoryScreen extends StatelessWidget {
-  const ProductSubCategoryScreen({Key? key}) : super(key: key);
-
+  ProductSubCategoryScreen({Key? key}) : super(key: key);
+  // String category;
+  // String subCategory;
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(63.0),
           child: ProductSubCategoryTopAppBar()),

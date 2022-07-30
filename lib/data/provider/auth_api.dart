@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ecommerce_v3/config.dart';
 import 'package:http/http.dart' as http;
 
 class AuthApi {
@@ -8,7 +9,7 @@ class AuthApi {
   Future<http.Response> signInWithAccount(
       {required email, required password}) async {
     try {
-      final response = await http.post(Uri.parse(getURL),
+      final response = await http.post(Uri.parse(Configurations().signInURL()),
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
           },

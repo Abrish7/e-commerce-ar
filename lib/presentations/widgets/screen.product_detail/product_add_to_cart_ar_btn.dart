@@ -1,10 +1,11 @@
-import 'package:ecommerce_v3/logic/product/cart/quantity_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../data/model/cart_model.dart';
-import '../../../../logic/product/cart/cart_cubit.dart';
 import '../../../../logic/product/product_cubit.dart';
+import '../../../data/provider/cart_api.dart';
+import '../../../data/repository/cart_repo.dart';
+import '../../../logic/cart/load_cart/cart_cubit.dart';
+import '../../../logic/cart/quantity_cubit.dart';
 
 class ProductAddToCartAndARBtn extends StatelessWidget {
   const ProductAddToCartAndARBtn({
@@ -25,12 +26,6 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton.icon(
                 style: ButtonStyle(
-                  // shape:MaterialStateProperty.resolveAs(OutlinedBorder()) ,
-                  // side: MaterialStateProperty.all(BorderSide(
-                  //   color:
-                  // )),
-                  // elevation: MaterialStateProperty.all(0),
-
                   maximumSize: MaterialStateProperty.all(Size.infinite),
                   backgroundColor: MaterialStateProperty.all(Colors.blue),
                 ),
@@ -74,23 +69,23 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                                   MaterialStateProperty.all(Size.infinite),
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.blue)),
-                          // shape: RoundedRectangleBorder(
-                          //     borderRadius: BorderRadius.circular(10)),
-                          // color: productState.product[index].color,
                           icon: Icon(Icons.shopping_cart),
                           onPressed: () {
-                            if (cartState.cart
-                                .containsKey(productState.product[index].id)) {
-                              buildSnackBar(productState,
-                                  'already added to cart.', Colors.red);
-                            } else {
-                              BlocProvider.of<CartCubit>(context).setCartState(
-                                  Cart(
-                                      productId: 10,
-                                      quantity: quantityState.quantity));
-                              buildSnackBar(
-                                  productState, 'added to cart.', Colors.blue);
-                            }
+                            print("add to cart button pressed");
+                            BlocProvider.of<CartCubit>(context)
+                              ..addToCart(
+                                  customerId: "62db005abbc8bfa29df7c691",
+                                  productId: productState.product[index].id,
+                                  quantity: 5)
+                              ..stream;
+                            // print('product loading ...');
+                            // BlocProvider<CartCubit>(
+                            //     create: (context) => CartCubit(
+                            //         CartRepository(cartApi: CartApi()))
+                            //       ..addToCart(
+                            //           customerId: "62db005abbc8bfa29df7c691",
+                            //           productId: productState.product[index].id,
+                            //           quantity: 5));
                           },
                           label: Padding(
                             padding: const EdgeInsets.all(20.0),

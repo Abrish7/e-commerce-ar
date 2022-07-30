@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class ProductItem extends StatelessWidget {
-  const ProductItem({Key? key, required this.index}) : super(key: key);
+class ProductFilterItem extends StatelessWidget {
+  const ProductFilterItem({Key? key, required this.index}) : super(key: key);
   final int index;
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,7 @@ class ProductItem extends StatelessWidget {
       child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
           if (state is ProductLoaded) {
-            print("index length on item: " +
-                state.product[index].image[0].toString());
+            print("PRODUCT ID: " + state.product[index].id.toString());
             return Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -39,7 +38,6 @@ class ProductItem extends StatelessWidget {
                     Container(
                       width: 200,
                       padding: const EdgeInsets.only(left: 2.0),
-                      // margin: EdgeInsets.all(5),
                       child: Text(
                         state.product[index].description,
                         style: TextStyle(),

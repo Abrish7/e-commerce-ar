@@ -71,13 +71,14 @@ class _FilterTypeState extends State<FilterType> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // ignore: deprecated_member_use
         RaisedButton.icon(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           elevation: 0,
           onPressed: () {
             if (data[index] == "Category") {
-              Navigator.of(context).pushNamed("/category");
+              Navigator.of(context).pushNamed("/category", arguments: index);
             }
           },
           icon: (iconType),

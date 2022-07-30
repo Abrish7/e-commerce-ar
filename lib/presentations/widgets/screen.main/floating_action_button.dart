@@ -1,8 +1,8 @@
-import 'package:ecommerce_v3/logic/product/cart/cart_cubit.dart';
 import 'package:ecommerce_v3/presentations/common/badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../logic/cart/load_cart/cart_cubit.dart';
 import '../../../logic/home/bottom_app_bar_cubit.dart';
 
 class MainFloatingActionButton extends StatelessWidget {
@@ -28,7 +28,7 @@ class MainFloatingActionButton extends StatelessWidget {
           buildWhen: (previous, current) => current != previous,
           builder: (context, cartState) {
             return Badge(
-              value: (cartState.cart.length - 1).toString(),
+              value: "2",
               color: const Color.fromARGB(255, 232, 7, 7),
               child: IconButton(
                 onPressed: () {},

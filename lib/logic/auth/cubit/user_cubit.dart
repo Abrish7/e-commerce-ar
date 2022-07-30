@@ -19,6 +19,7 @@ class UserCubit extends Cubit<UserState> {
   }
 }
 
+// ignore: must_be_immutable
 class UserState extends Equatable {
   User user;
   UserState({required this.user});

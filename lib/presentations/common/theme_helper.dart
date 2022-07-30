@@ -117,6 +117,7 @@ class ThemeHelper {
   BoxDecoration createButtonBoxDecoration(BuildContext context,
       [String color1 = '', String color2 = '']) {
     Color c1 = Theme.of(context).primaryColor;
+    // ignore: deprecated_member_use
     Color c2 = Theme.of(context).accentColor;
 
     if (color1.isEmpty) {

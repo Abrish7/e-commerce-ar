@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'package:ecommerce_v3/data/provider/product_category_api.dart';
-import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
+// ignore: unused_import
 import 'package:http/http.dart' as http;
 
+import '../../logic/category/product_category_cubit.dart';
 import '../model/product_category.dart';
 
 class ProductCategoryRepo {

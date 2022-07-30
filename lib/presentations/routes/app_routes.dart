@@ -1,9 +1,11 @@
+import 'package:ecommerce_v3/presentations/common/screen_arguments.dart';
 import 'package:ecommerce_v3/presentations/screens/ar_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/auth_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/cart_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_category_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/home_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_detail_screen.dart';
+import 'package:ecommerce_v3/presentations/screens/product_filter_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/main_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_sub_category_screen.dart';
@@ -15,7 +17,7 @@ import 'package:flutter/material.dart';
 class AppRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
     final args = routeSettings.arguments;
-    print("from router");
+    final category = routeSettings.arguments;
 
     switch (routeSettings.name) {
       case '/':
@@ -34,12 +36,16 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case '/product':
         return MaterialPageRoute(builder: (_) => const ProductScreen());
+      case '/product_filter':
+        return MaterialPageRoute(
+            builder: (_) => ProductFilterScreen(
+                category: (category as Category).category,
+                subCategory: (category).subCategory));
       case '/product_detail':
         return MaterialPageRoute(
             builder: (_) => ProductDetailScreen(index: args as int));
       case '/subCategory':
-        return MaterialPageRoute(
-            builder: (_) => const ProductSubCategoryScreen());
+        return MaterialPageRoute(builder: (_) => ProductSubCategoryScreen());
       case '/search':
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case '/setting':

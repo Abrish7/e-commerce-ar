@@ -1,9 +1,10 @@
-import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../data/model/product_model.dart';
+import '../../../logic/category/product_category_cubit.dart';
 
+// ignore: must_be_immutable
 class CategoryItem extends StatelessWidget {
   CategoryItem({Key? key, required this.index}) : super(key: key);
   final int index;

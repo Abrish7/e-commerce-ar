@@ -1,17 +1,22 @@
+import 'package:ecommerce_v3/data/provider/cart_api.dart';
+import 'package:ecommerce_v3/data/provider/product_filter_by_category_api.dart';
+import 'package:ecommerce_v3/data/repository/cart_repo.dart';
+import 'package:ecommerce_v3/data/repository/product_filter_by_category_repo.dart';
 import 'package:ecommerce_v3/data/repository/product_repo.dart';
 import 'package:ecommerce_v3/logic/auth/bloc/auth_bloc.dart';
 import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
+import 'package:ecommerce_v3/logic/cart/favorite_cubit.dart';
 import 'package:ecommerce_v3/logic/home/bottom_app_bar_cubit.dart';
-import 'package:ecommerce_v3/logic/product/cart/cart_cubit.dart';
-import 'package:ecommerce_v3/logic/product/cart/favorite_cubit.dart';
-import 'package:ecommerce_v3/logic/product/cart/quantity_cubit.dart';
-import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
-import 'package:ecommerce_v3/logic/product/event/like_cubit.dart';
+import 'package:ecommerce_v3/logic/other/like_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
-import 'package:ecommerce_v3/logic/product/sub_category/sub_category_cubit.dart';
+import 'package:ecommerce_v3/logic/product/product_filter_by_category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'data/provider/product_api.dart';
+import 'logic/cart/load_cart/cart_cubit.dart';
+import 'logic/cart/quantity_cubit.dart';
+import 'logic/category/product_category_cubit.dart';
+import 'logic/sub_category/sub_category_cubit.dart';
 import 'presentations/routes/app_routes.dart';
 
 void main() {
@@ -31,12 +36,23 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductCategoryCubit>(
             create: (context) =>
                 ProductCategoryCubit()..setProductCategoryLoadedState()),
+        // Product fetch by category cubit
+        BlocProvider<ProductFilterByCategoryCubit>(
+            create: (context) => ProductFilterByCategoryCubit(
+                ProductFilterByCategoryRepo(
+                    productApi: ProductFilterByCategoryApi()))),
+        // Product Cart Cubit
+        BlocProvider<CartCubit>(
+            create: (context) => CartCubit(CartRepository(cartApi: CartApi()))
+              ..addToCart(
+                  customerId: "62db005abbc8bfa29df7c691",
+                  productId: "62e2d9a469ddb28428eca02d",
+                  quantity: 5)),
         // Product Cubit
         BlocProvider<ProductCubit>(
             create: (context) =>
-                ProductCubit(ProductRepo(productApi: ProductApi()))),
-        // Product Cart Cubit
-        BlocProvider<CartCubit>(create: (context) => CartCubit()),
+                ProductCubit(ProductRepo(productApi: ProductApi()))
+                  ..loadProduct()),
         // product quantity Cubit
         BlocProvider<QuantityCubit>(create: (context) => QuantityCubit()),
         // bottom app bar Cubit

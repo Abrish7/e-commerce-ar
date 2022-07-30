@@ -35,6 +35,7 @@ class MainBody extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
+            // ignore: deprecated_member_use
             child: RaisedButton(
               onPressed: () {
                 scaffoldKey.currentState!.openDrawer();

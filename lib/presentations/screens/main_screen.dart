@@ -25,6 +25,7 @@ class _MainScreenState extends State<MainScreen> {
   _isLoggedIn() async {
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     SharedPreferences profs = await _prefs;
+    print("USER ID: " + profs.getString("id").toString());
     // print('auth widget..');
     // if (profs.getString("token")!.isNotEmpty) {
     //   print('first name value0: ' + profs.getString("firstName")!);
@@ -45,7 +46,6 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-
     return Scaffold(
       key: _scaffoldKey,
       body: HomeScreen(),

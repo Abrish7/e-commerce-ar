@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:ecommerce_v3/config.dart';
 import 'package:http/http.dart' as http;
 
 class RegistrationApi {
@@ -13,7 +14,7 @@ class RegistrationApi {
       required String password,
       required String confirmPassword}) async {
     try {
-      final response = await http.post(Uri.parse(getURL),
+      final response = await http.post(Uri.parse(Configurations().signUpURL()),
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
           },

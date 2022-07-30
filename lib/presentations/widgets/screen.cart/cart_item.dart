@@ -1,47 +1,181 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.cart/cart_quantity_counter.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class CartItem extends StatelessWidget {
-  const CartItem({Key? key}) : super(key: key);
+class CartItem extends StatefulWidget {
+  CartItem({Key? key, required this.index}) : super(key: key);
+  final index;
+
+  @override
+  State<CartItem> createState() => _CartItemState();
+}
+
+class _CartItemState extends State<CartItem> {
+  late int activeIndex = 0;
+
+  late int imageSize = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
+    return BlocBuilder<CartCubit, CartState>(
+      builder: (context, state) {
+        if (state is CartLoaded) {
+          return Column(
+            // mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _productImage("assets/images/shoe.png"),
-              _productDetails(),
-              _productQuantity()
+              Container(
+                width: MediaQuery.of(context).size.width,
+                // height: MediaQuery.of(context).size.height,
+                child: CarouselSlider.builder(
+                    itemCount: state.cart.cart.products[widget.index].productId
+                        .images.length,
+                    itemBuilder: (context, index, relIndex) {
+                      final urlImage = state.cart.cart
+                          .products[this.widget.index].productId.images[index];
+                      return _buildImage(urlImage, index);
+                    },
+                    options: CarouselOptions(
+                        enlargeCenterPage: true,
+                        enlargeStrategy: CenterPageEnlargeStrategy.height,
+                        enableInfiniteScroll: false,
+                        viewportFraction: 1,
+                        height: 250,
+                        autoPlay: true,
+                        autoPlayInterval: Duration(seconds: 10),
+                        onPageChanged: (index, reason) =>
+                            setState(() => activeIndex = index))),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              _buildImageIndicator(),
+              SizedBox(
+                height: 10,
+              ),
+              // product name
+              Container(
+                  padding: EdgeInsets.all(10),
+                  child: Text(
+                    state.cart.cart.products[this.widget.index].productId.name,
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                  )),
+              // Product description
+              Container(
+                  padding: EdgeInsets.only(left: 15, top: 5),
+                  child: Text(
+                    state.cart.cart.products[this.widget.index].productId
+                        .description,
+                    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
+                  )),
+              SizedBox(
+                height: 10,
+              ),
+              // pr
+              // product quantity
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        "Quantity ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 20),
+                        textAlign: TextAlign.left,
+                      )),
+                  Container(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        state.cart.cart.products[this.widget.index].productId
+                            .quantity
+                            .toString(),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w300, fontSize: 20),
+                        textAlign: TextAlign.left,
+                      )),
+                ],
+              ),
+
+              // Product Price
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        "Price ",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w400, fontSize: 20),
+                        textAlign: TextAlign.left,
+                      )),
+                  Container(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text(
+                        state.cart.cart.products[this.widget.index].productId
+                            .price.$numberDecimal,
+                        style: TextStyle(
+                            fontWeight: FontWeight.w300, fontSize: 20),
+                        textAlign: TextAlign.left,
+                      )),
+                ],
+              ),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                      padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
+                      child: IconButton(
+                          onPressed: () {},
+                          icon: Icon(
+                            Icons.cancel,
+                            size: 35,
+                            color: Colors.red[300],
+                          ))),
+                  Container(
+                      padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
+                      child: _productQuantity(
+                          this.widget.index, state.cart.cart.id))
+                ],
+              ),
             ],
-          )
-        ],
-      ),
+          );
+        }
+        return CircularProgressIndicator();
+      },
     );
   }
 
-  Widget _productImage(image) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 2.0, left: 2.0),
-      child: Container(
-        height: 100,
-        width: 100,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(5))),
-        child: Image.asset(image),
-      ),
+  _buildImage(String image, int index) {
+    return Container(
+      // width: 250,
+      margin: EdgeInsets.symmetric(horizontal: 10),
+      color: Colors.white,
+      child: Image.network(image),
     );
   }
+
+  Widget _buildImageIndicator() => Center(
+        child: AnimatedSmoothIndicator(
+          activeIndex: this.activeIndex,
+          curve: Curves.easeInOut,
+          count: imageSize,
+          effect: JumpingDotEffect(
+              dotWidth: 10,
+              dotHeight: 10,
+              activeDotColor: Color.fromARGB(255, 252, 113, 103),
+              dotColor: Colors.black12),
+        ),
+      );
 
   Widget _productDetails() {
     return Container(
-      // padding: const EdgeInsets.all(10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -73,7 +207,10 @@ class CartItem extends StatelessWidget {
     );
   }
 
-  Widget _productQuantity() {
-    return CartQuantityCounter(index: 1);
+  Widget _productQuantity(index, cartId) {
+    return CartQuantityCounter(
+      index: index,
+      cartId: cartId,
+    );
   }
 }

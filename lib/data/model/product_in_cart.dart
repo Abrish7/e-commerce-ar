@@ -1,5 +1,5 @@
-class CartList {
-  CartList({
+class ProductInCart {
+  ProductInCart({
     required this.message,
     required this.cart,
     required this.subTotal,
@@ -8,7 +8,7 @@ class CartList {
   late final Cart cart;
   late final double subTotal;
 
-  CartList.fromJson(Map<String, dynamic> json) {
+  ProductInCart.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     cart = Cart.fromJson(json['cart']);
     subTotal = json['subTotal'];

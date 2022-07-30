@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:ecommerce_v3/config.dart';
 import 'package:http/http.dart' as http;
 
 class ProductApi {
@@ -10,7 +11,11 @@ class ProductApi {
   Future<List<dynamic>> getProduct({required int page}) async {
     try {
       final response = await http.get(
-        Uri.parse(getURL + "/" + page.toString() + "/" + LIMIT.toString()),
+        Uri.parse(Configurations().getProductURL() +
+            "/" +
+            page.toString() +
+            "/" +
+            LIMIT.toString()),
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         },

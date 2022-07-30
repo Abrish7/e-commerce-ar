@@ -1,4 +1,6 @@
+import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartBottomSheet extends StatelessWidget {
   const CartBottomSheet({
@@ -16,8 +18,8 @@ class CartBottomSheet extends StatelessWidget {
         boxShadow: [
           BoxShadow(
             offset: Offset(0, 0),
-            blurRadius: 1,
-            spreadRadius: 1,
+            blurRadius: 0,
+            spreadRadius: 0.5,
             color: Colors.black12,
           ),
         ],
@@ -34,23 +36,36 @@ class CartBottomSheet extends StatelessWidget {
                 padding: EdgeInsets.all(5),
                 child: Text(
                   'Total',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
                 ),
               ),
-              Text('\$15200.00',
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500))
+              BlocBuilder<CartCubit, CartState>(
+                builder: (context, state) {
+                  if (state is CartLoaded) {
+                    return Text(state.cart.subTotal.toStringAsFixed(2),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w300));
+                  }
+                  return CircularProgressIndicator();
+                },
+              )
             ],
           ),
-          ElevatedButton(
-            style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(Colors.orange)),
+          RaisedButton(
+            // style: ButtonStyle(
+            //     backgroundColor: MaterialStateProperty.all(Colors)),
+            color: Colors.black,
+            elevation: 0,
             onPressed: () {},
             child: Container(
                 margin: EdgeInsets.only(top: 10, bottom: 15),
                 width: 200,
                 child: Text(
                   'order',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w300),
                   textAlign: TextAlign.center,
                 )),
           )

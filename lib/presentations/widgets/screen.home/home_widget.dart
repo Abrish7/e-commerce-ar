@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/theme_helper.dart';
 
+// ignore: must_be_immutable
 class HomeWidget extends StatelessWidget {
   HomeWidget({Key? key}) : super(key: key);
 
@@ -72,6 +73,7 @@ class HomeWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Container(
                     margin: EdgeInsets.all(2),
+                    // ignore: deprecated_member_use
                     child: RaisedButton(
                       elevation: 0.5,
                       child: const ListItem(
@@ -105,6 +107,7 @@ class HomeWidget extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return Container(
                     padding: const EdgeInsets.all(2.0),
+                    // ignore: deprecated_member_use
                     child: RaisedButton(
                       elevation: .5,
                       color: Colors.white,
@@ -156,6 +159,7 @@ class HomeWidget extends StatelessWidget {
     );
   }
 
+  // ignore: unused_element
   Widget _searchField() {
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -189,6 +193,7 @@ class HomeWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemBuilder: ((context, index) {
             if (index < products.length) {
+              // ignore: deprecated_member_use
               return RaisedButton(
                   elevation: 1,
                   color: Colors.grey[100],

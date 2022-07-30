@@ -21,7 +21,7 @@ class ProductCubit extends Cubit<ProductState> {
     emit(ProductLoading(oldProducts: oldProduct, isFirstFetch: page == 1));
 
     repository.fetchProduct(page: page).then((newProduct) {
-      page++;
+      // page++;
       final products = (state as ProductLoading).oldProducts;
       products.addAll(newProduct);
       emit(ProductLoaded(product: products));

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../logic/cart/load_cart/cart_cubit.dart';
 import '../../common/badge.dart';
 
-class ProductTopAppBar extends StatelessWidget {
-  const ProductTopAppBar({Key? key}) : super(key: key);
+class ProductFilterTopAppBar extends StatelessWidget {
+  const ProductFilterTopAppBar({Key? key}) : super(key: key);
   @override
   // ignore: todo
   // TODO: implement preferredSize
@@ -41,7 +41,7 @@ class ProductTopAppBar extends StatelessWidget {
           buildWhen: (previous, current) => current != previous,
           builder: (context, cartState) {
             return Badge(
-              value: "2",
+              value: (2).toString(),
               color: const Color.fromARGB(255, 232, 7, 7),
               child: IconButton(
                 onPressed: () {

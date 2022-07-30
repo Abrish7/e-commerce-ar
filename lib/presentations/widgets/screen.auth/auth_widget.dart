@@ -4,6 +4,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
+// ignore: unused_import
 import 'package:http/http.dart' as http;
 
 class AuthWidget extends StatefulWidget {
@@ -215,6 +216,7 @@ class _AuthWidgetState extends State<AuthWidget> {
             if ((value) != (state.password.value)) {
               return 'password does not match!';
             }
+            return null;
           },
           onChanged: (value) {
             BlocProvider.of<AuthBloc>(context)
@@ -364,6 +366,7 @@ class _AuthWidgetState extends State<AuthWidget> {
                 },
               style: TextStyle(
                   fontWeight: FontWeight.bold,
+                  // ignore: deprecated_member_use
                   color: Theme.of(context).accentColor)),
         ])));
   }
@@ -403,6 +406,7 @@ class _AuthWidgetState extends State<AuthWidget> {
   }
 
   void buildSnackBar(String append, Color color) {
+    // ignore: deprecated_member_use
     globalContext.currentState?.showSnackBar(SnackBar(
         duration: Duration(milliseconds: 1000),
         backgroundColor: color,

@@ -10,7 +10,7 @@ class _ArScreen extends State<ArScreen> {
   static final GlobalKey<ScaffoldState> _scaffoldKey =
       GlobalKey<ScaffoldState>();
   late UnityWidgetController _unityWidgetController;
-  double _sliderValue = 0.0;
+  // double _sliderValue = 0.0;
 
   @override
   void initState() {

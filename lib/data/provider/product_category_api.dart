@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:ecommerce_v3/config.dart';
 import 'package:http/http.dart' as http;
 
 class ProductCategoryApi {
@@ -7,7 +8,7 @@ class ProductCategoryApi {
   Future<http.Response> getProductCategory({token}) async {
     try {
       final response = await http.get(
-        Uri.parse(getURL),
+        Uri.parse(Configurations().getProductCategory()),
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         },

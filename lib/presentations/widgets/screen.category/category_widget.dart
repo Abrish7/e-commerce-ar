@@ -1,9 +1,12 @@
-import 'package:ecommerce_v3/logic/product/category/product_category_cubit.dart';
+// ignore_for_file: unnecessary_type_check
+
 import 'package:ecommerce_v3/presentations/widgets/screen.category/category_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../logic/product/sub_category/sub_category_cubit.dart';
+import '../../../logic/category/product_category_cubit.dart';
+import '../../../logic/sub_category/sub_category_cubit.dart';
+import '../../common/screen_arguments.dart';
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({Key? key}) : super(key: key);
@@ -30,6 +33,7 @@ class CategoryWidget extends StatelessWidget {
                       width: 200,
                       height: 200,
                       child: state is ProductCategoryLoaded
+                          // ignore: deprecated_member_use
                           ? RaisedButton(
                               elevation: 0,
                               color: Colors.white,
@@ -38,7 +42,10 @@ class CategoryWidget extends StatelessWidget {
                                     .setProductSubCategoryLoaded(
                                         subCategory: state.category[index].name
                                             .toString());
-                                Navigator.of(context).pushNamed('/subCategory');
+                                Navigator.of(context).pushNamed('/subCategory',
+                                    arguments: Category(
+                                        category: state.category[index].name,
+                                        subCategory: "Shoes"));
                               },
                               child: CategoryItem(index: index))
                           : Center(

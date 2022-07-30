@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:ecommerce_v3/data/model/product_sub_category.dart';
 import 'package:ecommerce_v3/data/provider/product_sub_category.dart';
+// ignore: unused_import
 import 'package:http/http.dart' as http;
 
-import '../../logic/product/sub_category/sub_category_cubit.dart';
+import '../../logic/sub_category/sub_category_cubit.dart';
 
 class ProductSubCategoryRepo {
   late final ProductSubCategoryApi _productSubCategoryApi =

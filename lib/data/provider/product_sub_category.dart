@@ -1,13 +1,14 @@
 import 'dart:io';
+import 'package:ecommerce_v3/config.dart';
 import 'package:http/http.dart' as http;
 
 class ProductSubCategoryApi {
   final String getURL =
-      "http://192.168.149.52:3000/api/products/fetch-product-subcategory/";
+      "http://192.168.149.52:3000/api/products/fetch-product-subcategory";
   Future<http.Response> getProductSubCategory({required category}) async {
     try {
       final response = await http.get(
-        Uri.parse(getURL + category),
+        Uri.parse(Configurations().getProductSubCategoryURL() + "/" + category),
         headers: {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
