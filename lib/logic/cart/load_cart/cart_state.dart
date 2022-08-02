@@ -11,8 +11,7 @@ class CartInitial extends CartState {}
 
 class CartLoading extends CartState {}
 
-// ignore: must_be_immutable
 class CartLoaded extends CartState {
-  ProductInCart cart;
+  NewCart cart;
   CartLoaded({required this.cart});
 }

@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
+import 'package:ecommerce_v3/logic/cart/quantity_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.cart/cart_quantity_counter.dart';
 
 import 'package:flutter/material.dart';
@@ -32,10 +33,10 @@ class _CartItemState extends State<CartItem> {
                 width: MediaQuery.of(context).size.width,
                 // height: MediaQuery.of(context).size.height,
                 child: CarouselSlider.builder(
-                    itemCount: state.cart.cart.products[widget.index].productId
-                        .images.length,
+                    itemCount: state.cart.cart[0].products[this.widget.index]
+                        .productId.images.length,
                     itemBuilder: (context, index, relIndex) {
-                      final urlImage = state.cart.cart
+                      final urlImage = state.cart.cart[0]
                           .products[this.widget.index].productId.images[index];
                       return _buildImage(urlImage, index);
                     },
@@ -61,14 +62,15 @@ class _CartItemState extends State<CartItem> {
               Container(
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    state.cart.cart.products[this.widget.index].productId.name,
+                    state.cart.cart[0].products[this.widget.index].productId
+                        .name,
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
                   )),
               // Product description
               Container(
                   padding: EdgeInsets.only(left: 15, top: 5),
                   child: Text(
-                    state.cart.cart.products[this.widget.index].productId
+                    state.cart.cart[0].products[this.widget.index].productId
                         .description,
                     style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
                   )),
@@ -91,7 +93,7 @@ class _CartItemState extends State<CartItem> {
                   Container(
                       padding: EdgeInsets.only(left: 10),
                       child: Text(
-                        state.cart.cart.products[this.widget.index].productId
+                        state.cart.cart[0].products[this.widget.index].productId
                             .quantity
                             .toString(),
                         style: TextStyle(
@@ -113,15 +115,25 @@ class _CartItemState extends State<CartItem> {
                             fontWeight: FontWeight.w400, fontSize: 20),
                         textAlign: TextAlign.left,
                       )),
-                  Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        state.cart.cart.products[this.widget.index].productId
-                            .price.$numberDecimal,
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300, fontSize: 20),
-                        textAlign: TextAlign.left,
-                      )),
+                  BlocBuilder<QuantityCubit, QuantityState>(
+                    buildWhen: (previous, current) =>
+                        state.cart.cart[0].products[this.widget.index].productId
+                            .id ==
+                        current.productId,
+                    builder: (context, quantityState) {
+                      return Container(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            state.cart.cart[0].products[this.widget.index]
+                                    .productId.price.$numberDecimal +
+                                " X " +
+                                quantityState.quantity.toString(),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w300, fontSize: 20),
+                            textAlign: TextAlign.left,
+                          ));
+                    },
+                  ),
                 ],
               ),
 
@@ -141,7 +153,10 @@ class _CartItemState extends State<CartItem> {
                   Container(
                       padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
                       child: _productQuantity(
-                          this.widget.index, state.cart.cart.id))
+                          this.widget.index,
+                          state.cart.cart[0].products[this.widget.index]
+                              .productId.id,
+                          state.cart.cart[0].customerId))
                 ],
               ),
             ],
@@ -207,10 +222,11 @@ class _CartItemState extends State<CartItem> {
     );
   }
 
-  Widget _productQuantity(index, cartId) {
+  Widget _productQuantity(index, productId, customerId) {
     return CartQuantityCounter(
       index: index,
-      cartId: cartId,
+      productId: productId,
+      customerId: customerId,
     );
   }
 }

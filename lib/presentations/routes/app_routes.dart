@@ -2,6 +2,7 @@ import 'package:ecommerce_v3/presentations/common/screen_arguments.dart';
 import 'package:ecommerce_v3/presentations/screens/ar_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/auth_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/cart_screen.dart';
+import 'package:ecommerce_v3/presentations/screens/payment_type_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_category_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/home_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_detail_screen.dart';
@@ -13,6 +14,8 @@ import 'package:ecommerce_v3/presentations/screens/profile_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/search_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/setting_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/payment_screen.dart';
 
 class AppRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
@@ -44,6 +47,10 @@ class AppRoutes {
       case '/product_detail':
         return MaterialPageRoute(
             builder: (_) => ProductDetailScreen(index: args as int));
+      case '/payment_type':
+        return MaterialPageRoute(builder: (_) => PaymentTypeScreen());
+      case '/payment':
+        return MaterialPageRoute(builder: (_) => PaymentScreen());
       case '/subCategory':
         return MaterialPageRoute(builder: (_) => ProductSubCategoryScreen());
       case '/search':

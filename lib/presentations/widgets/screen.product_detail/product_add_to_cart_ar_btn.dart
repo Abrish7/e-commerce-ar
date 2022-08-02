@@ -72,20 +72,18 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                           icon: Icon(Icons.shopping_cart),
                           onPressed: () {
                             print("add to cart button pressed");
-                            BlocProvider.of<CartCubit>(context)
-                              ..addToCart(
-                                  customerId: "62db005abbc8bfa29df7c691",
-                                  productId: productState.product[index].id,
-                                  quantity: 5)
-                              ..stream;
-                            // print('product loading ...');
-                            // BlocProvider<CartCubit>(
-                            //     create: (context) => CartCubit(
-                            //         CartRepository(cartApi: CartApi()))
-                            //       ..addToCart(
-                            //           customerId: "62db005abbc8bfa29df7c691",
-                            //           productId: productState.product[index].id,
-                            //           quantity: 5));
+                            BlocProvider.of<CartCubit>(context).addToCart(
+                                customerId: "62db005abbc8bfa29df7c691",
+                                productId: productState.product[index].id,
+                                quantity: 5);
+                            print('product loading ...');
+                            BlocProvider<CartCubit>(
+                                create: (context) => CartCubit(
+                                    CartRepository(cartApi: CartApi()))
+                                  ..addToCart(
+                                      customerId: "62db005abbc8bfa29df7c691",
+                                      productId: productState.product[index].id,
+                                      quantity: 5));
                           },
                           label: Padding(
                             padding: const EdgeInsets.all(20.0),

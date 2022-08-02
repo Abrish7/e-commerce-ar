@@ -84,8 +84,11 @@ class ProductQuantityCounter extends StatelessWidget {
                       onPressed: () {
                         BlocProvider.of<QuantityCubit>(context)
                             .decreaseQuantityState(
+                                customerId: "",
                                 quantity: quantityState.quantity,
-                                size: productState.product[index].quantity);
+                                size: productState.product[index].quantity,
+                                productId: "",
+                                isEdited: true);
                       },
                       child: Icon(
                         icon,
@@ -119,8 +122,11 @@ class ProductQuantityCounter extends StatelessWidget {
                     onPressed: () {
                       BlocProvider.of<QuantityCubit>(context)
                           .increaseQuantityState(
+                              isEdited: true,
+                              customerId: "",
                               quantity: quantityState.quantity,
-                              size: productState.product[index].quantity);
+                              size: productState.product[index].quantity,
+                              productId: "");
                     },
                     child: Icon(
                       icon,

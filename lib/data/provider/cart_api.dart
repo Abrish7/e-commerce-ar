@@ -27,22 +27,44 @@ class CartApi {
     }
   }
 
+  Future<dynamic> getCustomerCart({required customerId}) async {
+    try {
+      final response = await http.get(
+        Uri.parse(Configurations().getCustomerCartURL() + "/" + customerId),
+        headers: {
+          HttpHeaders.contentTypeHeader: 'application/json',
+        },
+      );
+      final data = (jsonDecode(response.body));
+      return data;
+    } catch (e) {
+      return [];
+    }
+  }
+
   Future<dynamic> updateCartQuantity(
       {required customerId, required productId, required quantity}) async {
+    print("customer: " +
+        customerId +
+        " product: " +
+        productId +
+        " quantity: " +
+        quantity.toString());
     try {
-      final response = await http.post(Uri.parse(Configurations().getCartURL()),
+      final response = await http.post(
+          Uri.parse(Configurations().getCartQuantityUpdateURL()),
           headers: {
             HttpHeaders.contentTypeHeader: 'application/json',
           },
           body: jsonEncode(<String, dynamic>{
             'customerId': customerId,
-            'products': [
-              {"productId": productId, "quantity": quantity}
-            ],
+            'productId': productId,
+            'newQuantity': quantity
           }));
-      final data = (jsonDecode(response.body));
+      final data = (jsonDecode(response.body)['message']);
       return data;
     } catch (e) {
+      print("Error");
       return [];
     }
   }

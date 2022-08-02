@@ -1,3 +1,4 @@
+import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
 import 'package:ecommerce_v3/presentations/screens/home_screen.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.main/drawer.dart';
 import 'package:flutter/gestures.dart';
@@ -39,8 +40,8 @@ class _MainScreenState extends State<MainScreen> {
         updateAt: profs.getString("createdAt").toString(),
         token: profs.getString("token").toString()));
 
-    // BlocProvider.of<AuthBloc>(context)
-    //     .add(IsAlreadyLoggedIn(isUserLoggedIn: true));
+    BlocProvider.of<CartCubit>(context)
+        .getCustomerCart(customerId: profs.getString("id").toString());
   }
 
   @override

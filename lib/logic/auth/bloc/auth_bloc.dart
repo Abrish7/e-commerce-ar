@@ -8,6 +8,7 @@ import 'package:ecommerce_v3/logic/auth/form/lastname.dart';
 import 'package:ecommerce_v3/logic/auth/form/password.dart';
 import 'package:ecommerce_v3/logic/auth/form/username.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formz/formz.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -163,6 +164,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
             prefs.setString("updatedAt", value.updateAt);
             prefs.setString("token", value.token);
             print('bloc state...');
+
             _submissionSuccess();
           } else {
             value as http.Response;

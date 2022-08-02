@@ -1,35 +1,101 @@
+import 'package:ecommerce_v3/data/provider/cart_api.dart';
+import 'package:ecommerce_v3/data/repository/cart_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 // part 'quantity_state.dart';
 
 class QuantityCubit extends Cubit<QuantityState> {
-  QuantityCubit() : super(QuantityState(quantity: 1, size: 1));
+  QuantityCubit()
+      : super(QuantityState(
+            isEdited: false, quantity: 1, size: 1, productId: ""));
 
-  void increaseQuantityState({required quantity, required size}) {
+  void setQuantity(
+      {required isEdited,
+      required customerId,
+      required quantity,
+      required size,
+      required productId}) {
+    emit(QuantityState(
+        isEdited: isEdited,
+        quantity: quantity,
+        size: size,
+        productId: productId));
+  }
+
+  void increaseQuantityState(
+      {required isEdited,
+      required customerId,
+      required quantity,
+      required size,
+      required productId}) async {
     if (state.quantity == state.size) {
       print('quantity size stop');
-      emit(QuantityState(quantity: quantity, size: size));
+      emit(QuantityState(
+          isEdited: isEdited,
+          quantity: quantity,
+          size: size,
+          productId: productId));
     } else {
-      print('quantity size --');
-      emit(QuantityState(quantity: quantity + 1, size: size));
+      await CartRepository(cartApi: CartApi())
+          .updateCartQuantity(
+              customerId: customerId,
+              productId: productId,
+              quantity: quantity + 1)
+          .then((value) {
+        // print("EMITTING CART QUANTITY:" + quantity.quantity.toString());
+        emit(QuantityState(
+            isEdited: isEdited,
+            quantity: quantity + 1,
+            size: size,
+            productId: productId));
+        // }
+      });
     }
   }
 
-  void decreaseQuantityState({required quantity, required size}) {
+  void decreaseQuantityState(
+      {required isEdited,
+      required customerId,
+      required quantity,
+      required size,
+      required productId}) async {
     if (state.quantity == 1) {
       print('quantity size stop');
-      emit(QuantityState(quantity: quantity, size: size));
+      emit(QuantityState(
+          isEdited: isEdited,
+          quantity: quantity,
+          size: size,
+          productId: productId));
     } else {
-      print('quantity size --');
-      emit(QuantityState(quantity: quantity - 1, size: size));
+      await CartRepository(cartApi: CartApi())
+          .updateCartQuantity(
+              customerId: customerId,
+              productId: productId,
+              quantity: quantity - 1)
+          .then((value) {
+        // print("EMITTING CART QUANTITY:" + quantity.quantity);
+        emit(QuantityState(
+            isEdited: isEdited,
+            quantity: quantity - 1,
+            size: size,
+            productId: productId));
+        // }
+      });
     }
   }
 
-  void resetQuantityState() => emit(QuantityState(quantity: 1, size: 0));
+  void resetQuantityState() =>
+      emit(QuantityState(quantity: 1, size: 0, productId: "", isEdited: false));
 }
 
 class QuantityState {
   final int quantity;
   final int size;
-  QuantityState({required this.quantity, required this.size});
+  final String productId;
+  final bool isEdited;
+  QuantityState(
+      {required this.isEdited,
+      required this.quantity,
+      required this.size,
+      required this.productId});
 }

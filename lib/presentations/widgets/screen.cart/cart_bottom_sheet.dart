@@ -56,7 +56,9 @@ class CartBottomSheet extends StatelessWidget {
             //     backgroundColor: MaterialStateProperty.all(Colors)),
             color: Colors.black,
             elevation: 0,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pushNamed(context, '/payment_type');
+            },
             child: Container(
                 margin: EdgeInsets.only(top: 10, bottom: 15),
                 width: 200,

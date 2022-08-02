@@ -24,7 +24,7 @@ class _CartWidgetState extends State<CartWidget> {
       builder: (context, state) {
         if (state is CartLoaded) {
           return ListView.builder(
-              itemCount: state.cart.cart.products.length,
+              itemCount: state.cart.cart[0].products.length,
               itemBuilder: (context, index) {
                 return Container(
                   margin: EdgeInsets.all(5),

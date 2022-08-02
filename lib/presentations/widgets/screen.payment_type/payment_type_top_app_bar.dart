@@ -1,0 +1,48 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../logic/cart/load_cart/cart_cubit.dart';
+import '../../common/badge.dart';
+
+class PaymentTypeTopAppBar extends StatelessWidget {
+  const PaymentTypeTopAppBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      title: Text(
+        'Payment type',
+        style: TextStyle(color: Colors.black),
+      ),
+      toolbarHeight: 300.0,
+      backgroundColor: Colors.white,
+      elevation: 0,
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
+        onPressed: () {
+          Navigator.of(context).pushNamed('/cart');
+        },
+      ),
+      actions: [
+        BlocBuilder<CartCubit, CartState>(
+          buildWhen: (previous, current) => current != previous,
+          builder: (context, cartState) {
+            return Badge(
+              value: "2",
+              color: const Color.fromARGB(255, 232, 7, 7),
+              child: IconButton(
+                onPressed: () {},
+                icon: const Icon(
+                  Icons.shopping_cart,
+                  color: Colors.black,
+                ),
+              ),
+            );
+          },
+        )
+      ],
+    );
+  }
+}

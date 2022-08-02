@@ -24,7 +24,8 @@ class RegistrationApi {
             'email': email,
             'username': username,
             'password': password,
-            'confirm_password': confirmPassword
+            'confirm_password': confirmPassword,
+            'role': 'customer',
           }));
 
       if (response.statusCode == 200) {

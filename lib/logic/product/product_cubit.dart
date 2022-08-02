@@ -7,7 +7,7 @@ part 'product_state.dart';
 class ProductCubit extends Cubit<ProductState> {
   ProductCubit(this.repository) : super(ProductInitial());
 
-  int page = 1;
+  int page = 0;
   final ProductRepo repository;
 
   void loadProduct() {

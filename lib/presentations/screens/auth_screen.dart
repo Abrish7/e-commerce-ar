@@ -1,4 +1,5 @@
 import 'package:ecommerce_v3/logic/auth/bloc/auth_bloc.dart';
+import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.auth/auth_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,6 +30,8 @@ class _AuthScreenState extends State<AuthScreen> {
     if (profs.getString("token")!.isNotEmpty) {
       BlocProvider.of<AuthBloc>(context)
           .add(IsAlreadyLoggedIn(isUserLoggedIn: true));
+      BlocProvider.of<CartCubit>(context)
+          .getCustomerCart(customerId: profs.getString("id").toString());
     }
   }
 

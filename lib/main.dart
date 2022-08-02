@@ -43,11 +43,7 @@ class MyApp extends StatelessWidget {
                     productApi: ProductFilterByCategoryApi()))),
         // Product Cart Cubit
         BlocProvider<CartCubit>(
-            create: (context) => CartCubit(CartRepository(cartApi: CartApi()))
-              ..addToCart(
-                  customerId: "62db005abbc8bfa29df7c691",
-                  productId: "62e2d9a469ddb28428eca02d",
-                  quantity: 5)),
+            create: (context) => CartCubit(CartRepository(cartApi: CartApi()))),
         // Product Cubit
         BlocProvider<ProductCubit>(
             create: (context) =>
@@ -56,6 +52,7 @@ class MyApp extends StatelessWidget {
         // product quantity Cubit
         BlocProvider<QuantityCubit>(create: (context) => QuantityCubit()),
         // bottom app bar Cubit
+
         BlocProvider<BottomAppBarCubit>(
             create: (context) => BottomAppBarCubit()),
         // User Cubit
