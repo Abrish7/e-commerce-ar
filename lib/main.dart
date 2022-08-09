@@ -1,3 +1,4 @@
+import 'package:ecommerce_v3/config.dart';
 import 'package:ecommerce_v3/data/provider/cart_api.dart';
 import 'package:ecommerce_v3/data/provider/product_filter_by_category_api.dart';
 import 'package:ecommerce_v3/data/repository/cart_repo.dart';
@@ -8,10 +9,12 @@ import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
 import 'package:ecommerce_v3/logic/cart/favorite_cubit.dart';
 import 'package:ecommerce_v3/logic/home/bottom_app_bar_cubit.dart';
 import 'package:ecommerce_v3/logic/other/like_cubit.dart';
+import 'package:ecommerce_v3/logic/payment/payment_bloc.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_filter_by_category_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'data/provider/product_api.dart';
 import 'logic/cart/load_cart/cart_cubit.dart';
 import 'logic/cart/quantity_cubit.dart';
@@ -19,7 +22,10 @@ import 'logic/category/product_category_cubit.dart';
 import 'logic/sub_category/sub_category_cubit.dart';
 import 'presentations/routes/app_routes.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Stripe.publishableKey = Configurations().getStripePublicKey();
+  await Stripe.instance.applySettings();
   runApp(const MyApp());
 }
 
@@ -52,7 +58,6 @@ class MyApp extends StatelessWidget {
         // product quantity Cubit
         BlocProvider<QuantityCubit>(create: (context) => QuantityCubit()),
         // bottom app bar Cubit
-
         BlocProvider<BottomAppBarCubit>(
             create: (context) => BottomAppBarCubit()),
         // User Cubit
@@ -62,11 +67,10 @@ class MyApp extends StatelessWidget {
         // Product isLike Cubit for like & unlike rule
         BlocProvider<LikeCubit>(create: (context) => LikeCubit()),
         // Product Favorite Cubit
-        BlocProvider<FavoriteCubit>(
-          create: (context) => FavoriteCubit(),
-        )
+        BlocProvider<FavoriteCubit>(create: (context) => FavoriteCubit()),
+        // Payment Bloc
+        BlocProvider<PaymentBloc>(create: (context) => PaymentBloc())
       ],
-      //
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',

@@ -17,152 +17,139 @@ class CartItem extends StatefulWidget {
 
 class _CartItemState extends State<CartItem> {
   late int activeIndex = 0;
-
   late int imageSize = 0;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
-        if (state is CartLoaded) {
-          return Column(
-            // mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                width: MediaQuery.of(context).size.width,
-                // height: MediaQuery.of(context).size.height,
-                child: CarouselSlider.builder(
-                    itemCount: state.cart.cart[0].products[this.widget.index]
-                        .productId.images.length,
-                    itemBuilder: (context, index, relIndex) {
-                      final urlImage = state.cart.cart[0]
-                          .products[this.widget.index].productId.images[index];
-                      return _buildImage(urlImage, index);
-                    },
-                    options: CarouselOptions(
-                        enlargeCenterPage: true,
-                        enlargeStrategy: CenterPageEnlargeStrategy.height,
-                        enableInfiniteScroll: false,
-                        viewportFraction: 1,
-                        height: 250,
-                        autoPlay: true,
-                        autoPlayInterval: Duration(seconds: 10),
-                        onPageChanged: (index, reason) =>
-                            setState(() => activeIndex = index))),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              _buildImageIndicator(),
-              SizedBox(
-                height: 10,
-              ),
-              // product name
-              Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    state.cart.cart[0].products[this.widget.index].productId
-                        .name,
-                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
-                  )),
-              // Product description
-              Container(
-                  padding: EdgeInsets.only(left: 15, top: 5),
-                  child: Text(
-                    state.cart.cart[0].products[this.widget.index].productId
-                        .description,
-                    style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
-                  )),
-              SizedBox(
-                height: 10,
-              ),
-              // pr
-              // product quantity
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Quantity ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 20),
-                        textAlign: TextAlign.left,
-                      )),
-                  Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        state.cart.cart[0].products[this.widget.index].productId
-                            .quantity
-                            .toString(),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w300, fontSize: 20),
-                        textAlign: TextAlign.left,
-                      )),
-                ],
-              ),
+        // if (state is CartLoaded) {
+        return Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height,
+              child: CarouselSlider.builder(
+                  itemCount: state.cart[this.widget.index].image.length,
+                  itemBuilder: (context, index, relIndex) {
+                    final urlImage = state.cart[this.widget.index].image[index];
+                    return _buildImage(urlImage, index);
+                  },
+                  options: CarouselOptions(
+                      enlargeCenterPage: true,
+                      enlargeStrategy: CenterPageEnlargeStrategy.height,
+                      enableInfiniteScroll: false,
+                      viewportFraction: 1,
+                      height: 250,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 10),
+                      onPageChanged: (index, reason) =>
+                          setState(() => activeIndex = index))),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            _buildImageIndicator(),
+            SizedBox(
+              height: 10,
+            ),
+            // product name
+            Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  state.cart[this.widget.index].name,
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                )),
+            // Product description
+            Container(
+                padding: EdgeInsets.only(left: 15, top: 5),
+                child: Text(
+                  state.cart[this.widget.index].description,
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
+                )),
+            SizedBox(
+              height: 10,
+            ),
+            // pr
+            // product quantity
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Quantity ",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                      textAlign: TextAlign.left,
+                    )),
+                Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      state.cart[this.widget.index].quantity.toString(),
+                      style:
+                          TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
+                      textAlign: TextAlign.left,
+                    )),
+              ],
+            ),
 
-              // Product Price
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(left: 10),
-                      child: Text(
-                        "Price ",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w400, fontSize: 20),
-                        textAlign: TextAlign.left,
-                      )),
-                  BlocBuilder<QuantityCubit, QuantityState>(
-                    buildWhen: (previous, current) =>
-                        state.cart.cart[0].products[this.widget.index].productId
-                            .id ==
-                        current.productId,
-                    builder: (context, quantityState) {
-                      return Container(
-                          padding: EdgeInsets.only(left: 10),
-                          child: Text(
-                            state.cart.cart[0].products[this.widget.index]
-                                    .productId.price.$numberDecimal +
-                                " X " +
-                                quantityState.quantity.toString(),
-                            style: TextStyle(
-                                fontWeight: FontWeight.w300, fontSize: 20),
-                            textAlign: TextAlign.left,
-                          ));
-                    },
-                  ),
-                ],
-              ),
+            // Product Price
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text(
+                      "Price ",
+                      style:
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
+                      textAlign: TextAlign.left,
+                    )),
+                BlocBuilder<QuantityCubit, QuantityState>(
+                  buildWhen: (previous, current) =>
+                      state.cart[this.widget.index].id == current.productId,
+                  builder: (context, quantityState) {
+                    return Container(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          " X " + quantityState.quantity.toString(),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w300, fontSize: 20),
+                          textAlign: TextAlign.left,
+                        ));
+                  },
+                ),
+              ],
+            ),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
-                      child: IconButton(
-                          onPressed: () {},
-                          icon: Icon(
-                            Icons.cancel,
-                            size: 35,
-                            color: Colors.red[300],
-                          ))),
-                  Container(
-                      padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
-                      child: _productQuantity(
-                          this.widget.index,
-                          state.cart.cart[0].products[this.widget.index]
-                              .productId.id,
-                          state.cart.cart[0].customerId))
-                ],
-              ),
-            ],
-          );
-        }
-        return CircularProgressIndicator();
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
+                    child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.cancel,
+                          size: 35,
+                          color: Colors.red[300],
+                        ))),
+                Container(
+                    padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
+                    child: _productQuantity(
+                        this.widget.index,
+                        state.cart[this.widget.index].id,
+                        state.cart[this.widget.index].quantity))
+              ],
+            ),
+          ],
+        );
+        // }
+        // return CircularProgressIndicator();
       },
     );
   }
@@ -222,11 +209,11 @@ class _CartItemState extends State<CartItem> {
     );
   }
 
-  Widget _productQuantity(index, productId, customerId) {
+  Widget _productQuantity(index, productId, quantity) {
     return CartQuantityCounter(
       index: index,
       productId: productId,
-      customerId: customerId,
+      quantity: quantity,
     );
   }
 }

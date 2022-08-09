@@ -27,7 +27,7 @@ class CartApi {
     }
   }
 
-  Future<dynamic> getCustomerCart({required customerId}) async {
+  Future<List<dynamic>> getCustomerCart({required customerId}) async {
     try {
       final response = await http.get(
         Uri.parse(Configurations().getCustomerCartURL() + "/" + customerId),
@@ -35,7 +35,8 @@ class CartApi {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
-      final data = (jsonDecode(response.body));
+      final data = (jsonDecode(response.body)['cart'][0]['products'] as List);
+      // print('new products' + data[0].toString());
       return data;
     } catch (e) {
       return [];

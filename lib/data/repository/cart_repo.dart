@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:ecommerce_v3/data/model/new_cart.dart';
+import 'package:ecommerce_v3/data/model/cart_model.dart';
 import 'package:ecommerce_v3/data/model/updated_cart.dart';
 import 'package:ecommerce_v3/data/provider/cart_api.dart';
 
@@ -15,10 +13,10 @@ class CartRepository {
     return UpdatedCart.fromJson(cart);
   }
 
-  Future<NewCart> fetchCustomerCart({required customerId}) async {
-    final cart = await cartApi.getCustomerCart(customerId: customerId);
-    print(cart.toString());
-    return NewCart.fromJson(cart);
+  Future<List<CartModel>> fetchCustomerCart({required customerId}) async {
+    final products = await cartApi.getCustomerCart(customerId: customerId);
+    // print(products.toString());
+    return products.map((e) => CartModel.fromJson(e)).toList();
   }
 
   Future<String> updateCartQuantity(

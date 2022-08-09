@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-
 import '../widgets/screen.payment/payment_top_app_bar.dart';
 import '../widgets/screen.payment/payment_widget.dart';
 
@@ -14,7 +11,10 @@ class PaymentScreen extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: PreferredSize(
           child: PaymentTopAppBar(), preferredSize: Size.fromHeight(65)),
-      body: PaymentWidget(),
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: PaymentWidget(),
+      ),
     );
   }
 }

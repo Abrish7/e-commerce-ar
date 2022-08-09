@@ -6,14 +6,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class CartQuantityCounter extends StatelessWidget {
   CartQuantityCounter(
       {Key? key,
-      required this.customerId,
       required this.index,
-      required this.productId})
+      required this.productId,
+      required this.quantity})
       : super(key: key);
   final int index;
   final String productId;
-  final String customerId;
-  late int quantity = 1;
+  // final String customerId;
+  late int quantity;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -28,31 +28,34 @@ class CartQuantityCounter extends StatelessWidget {
                 icon: Icons.remove, size: 1, context: context),
             Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: BlocBuilder<QuantityCubit, QuantityState>(
-                  buildWhen: (previous, current) =>
-                      current.productId == productId,
-                  builder: (context, quantityState) {
-                    quantity = quantityState.quantity;
+                child:
+                    // BlocBuilder<QuantityCubit, QuantityState>(
+                    //   // Building only this index
+                    //   buildWhen: (previous, current) =>
+                    //       current.productId == productId,
+                    //   builder: (context, quantityState) {
+                    //     quantity = quantityState.quantity;
                     // Display Quantity
-                    return Text(
-                      quantity.toString(),
-                      style: Theme.of(context).textTheme.headline6,
-                    );
-                  },
-                )),
+                    Text(
+                  quantity.toString(),
+                  style: Theme.of(context).textTheme.headline6,
+                )
+                //   },
+                ),
             // })),
             builtOutlinedButtonAdd(icon: Icons.add, size: 10, context: context),
             BlocBuilder<CartCubit, CartState>(
               builder: (context, state) {
-                if (state is CartLoaded) {
-                  BlocProvider.of<QuantityCubit>(context).setQuantity(
-                      customerId: this.customerId,
-                      quantity: state.cart.cart[0].products[index].quantity,
-                      size:
-                          state.cart.cart[0].products[index].productId.quantity,
-                      productId: this.productId,
-                      isEdited: true);
-                }
+                // if (state is CartLoaded) {
+                // BlocProvider.of<QuantityCubit>(context)
+                //   ..setQuantity(
+                //       customerId: this.customerId,
+                //       quantity: state.cart.cart[0].products[index].quantity,
+                //       size:
+                //           state.cart.cart[0].products[index].productId.quantity,
+                //       productId: this.productId,
+                //       isEdited: true);
+                // // }
                 return Container();
               },
             )
@@ -73,13 +76,17 @@ class CartQuantityCounter extends StatelessWidget {
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white)),
             onPressed: () {
-              BlocProvider.of<QuantityCubit>(context).decreaseQuantityState(
-                  customerId: this.customerId,
-                  quantity: quantity,
-                  size: 10,
-                  productId: this.productId,
-                  isEdited: true);
-              print('counter -- : ... ' + index.toString());
+              BlocProvider.of<CartCubit>(context).updateCart(
+                  // customerId: customerId,
+                  productId: productId,
+                  quantity: quantity + 1);
+              // BlocProvider.of<QuantityCubit>(context).decreaseQuantityState(
+              //     customerId: this.customerId,
+              //     quantity: quantity,
+              //     size: 10,
+              //     productId: this.productId,
+              //     index: index);
+              // print('counter -- : ... ' + index.toString());
             },
             child: Icon(
               icon,
@@ -98,13 +105,18 @@ class CartQuantityCounter extends StatelessWidget {
             style: ButtonStyle(
                 backgroundColor: MaterialStateProperty.all(Colors.white)),
             onPressed: () {
-              BlocProvider.of<QuantityCubit>(context).increaseQuantityState(
-                  isEdited: true,
-                  customerId: this.customerId,
-                  quantity: quantity,
-                  size: 10,
-                  productId: this.productId);
-              print('counter ++ : ... ' + index.toString());
+              BlocProvider.of<CartCubit>(context).updateCart(
+                  // customerId: customerId,
+                  productId: productId,
+                  quantity: quantity + 1);
+
+              // BlocProvider.of<QuantityCubit>(context).increaseQuantityState(
+              //     index: index,
+              //     customerId: this.customerId,
+              //     quantity: quantity,
+              //     size: 10,
+              //     productId: this.productId);
+              // print('counter ++ : ... ' + index.toString());
             },
             child: Icon(
               icon,

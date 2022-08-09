@@ -20,28 +20,30 @@ class _CartWidgetState extends State<CartWidget> {
   }
 
   Widget _buildCartList() {
-    return BlocBuilder<CartCubit, CartState>(
-      builder: (context, state) {
-        if (state is CartLoaded) {
-          return ListView.builder(
-              itemCount: state.cart.cart[0].products.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.all(5),
-                  padding: EdgeInsets.all(5),
-                  // ignore: deprecated_member_use
-                  child: RaisedButton(
-                      elevation: 0.8,
-                      color: Colors.white,
-                      onPressed: () {},
-                      child: CartItem(index: index)),
-                );
-              });
-        }
-        return const Center(
-          child: CircularProgressIndicator(),
+    return BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+      // if (state is CartLoaded) {
+      return ListView.builder(
+          key: UniqueKey(),
+          itemCount: state.cart.length,
+          itemBuilder: (context, index) {
+            return Container(
+              margin: EdgeInsets.all(5),
+              padding: EdgeInsets.all(5),
+              // ignore: deprecated_member_use
+              child: RaisedButton(
+                  elevation: 0.8,
+                  color: Colors.white,
+                  onPressed: () {
+                    print('all item clicked ... ');
+                  },
+                  child: CartItem(index: index)),
+            );
+          });
+    }
+        //   return const Center(
+        //     child: CircularProgressIndicator(),
+        //   );
+        // },
         );
-      },
-    );
   }
 }
