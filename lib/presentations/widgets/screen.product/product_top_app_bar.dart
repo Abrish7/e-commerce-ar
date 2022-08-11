@@ -15,46 +15,35 @@ class ProductTopAppBar extends StatelessWidget {
       backgroundColor: Colors.white,
       elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back, color: Colors.grey),
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () {
           Navigator.of(context).pushNamed('/subCategory');
         },
       ),
       actions: [
         IconButton(
-            onPressed: () {
-              // shoppingCartDialogue(context);
-              // showSlidingBottomSheet(context, builder: (context) {
-              //   return SlidingSheetDialog(
-              //       elevation: 8,
-              //       cornerRadius: 16,
-              //       builder: (context, state) {
-              //         return BottomCartSheet();
-              //       });
-              // });
-            },
+            onPressed: () {},
             icon: const Icon(
               Icons.search,
-              color: Colors.grey,
+              color: Colors.black,
             )),
         BlocBuilder<CartCubit, CartState>(
-          buildWhen: (previous, current) => current != previous,
-          builder: (context, cartState) {
-            return Badge(
-              value: "2",
-              color: const Color.fromARGB(255, 232, 7, 7),
-              child: IconButton(
-                onPressed: () {
-                  // shoppingCartDialogue(context);
-                },
-                icon: const Icon(
-                  Icons.shopping_cart,
-                  color: Colors.grey,
+            buildWhen: (previous, current) => current != previous,
+            builder: (context, cartState) {
+              return Badge(
+                value: cartState.cart.length.toString(),
+                color: Color.fromARGB(255, 255, 0, 0),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/cart');
+                  },
+                  icon: const Icon(
+                    Icons.shopping_cart,
+                    color: Colors.black,
+                  ),
                 ),
-              ),
-            );
-          },
-        )
+              );
+            })
       ],
     );
   }

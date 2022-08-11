@@ -28,6 +28,22 @@ class CartCubit extends Cubit<CartState> {
     });
   }
 
+  void removeCustomerCartItem({required customerId, required productId}) async {
+    print("REMOVE CUSTOMER CART ITEM :) ");
+    await cartRepository
+        .removeCustomerCartItem(customerId: customerId, productId: productId)
+        .then((cart) {
+      print("ITEM REMOVED FROM CART : " + cart.toString());
+      if (cart == true) {
+        print("customer ID : " + customerId.toString());
+        print("product  ID : " + productId.toString());
+        List<CartModel> carts = List.from(state.cart)
+          ..removeWhere((element) => element.id == productId);
+        emit(state.copyWith(cart: carts));
+      }
+    });
+  }
+
   void updateCart({required productId, required quantity}) {
     int index = state.cart.indexWhere((element) => element.id == productId);
 

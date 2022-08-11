@@ -7,9 +7,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import '../../../logic/auth/cubit/user_cubit.dart';
+
 class CartItem extends StatefulWidget {
-  CartItem({Key? key, required this.index}) : super(key: key);
+  CartItem({Key? key, required this.index, required this.productId})
+      : super(key: key);
   final index;
+  final String productId;
 
   @override
   State<CartItem> createState() => _CartItemState();
@@ -18,7 +22,7 @@ class CartItem extends StatefulWidget {
 class _CartItemState extends State<CartItem> {
   late int activeIndex = 0;
   late int imageSize = 0;
-
+  late String customerId = "";
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
@@ -124,7 +128,10 @@ class _CartItemState extends State<CartItem> {
                 ),
               ],
             ),
-
+            BlocBuilder<UserCubit, UserState>(builder: (context, userState) {
+              customerId = userState.user.id.toString();
+              return Container();
+            }),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -132,7 +139,12 @@ class _CartItemState extends State<CartItem> {
                 Container(
                     padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
                     child: IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          BlocProvider.of<CartCubit>(context)
+                              .removeCustomerCartItem(
+                                  customerId: customerId,
+                                  productId: this.widget.productId);
+                        },
                         icon: Icon(
                           Icons.cancel,
                           size: 35,

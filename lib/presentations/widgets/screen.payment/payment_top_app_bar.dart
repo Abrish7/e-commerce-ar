@@ -30,10 +30,12 @@ class PaymentTopAppBar extends StatelessWidget {
           buildWhen: (previous, current) => current != previous,
           builder: (context, cartState) {
             return Badge(
-              value: "2",
+              value: cartState.cart.length.toString(),
               color: const Color.fromARGB(255, 232, 7, 7),
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed('/cart');
+                },
                 icon: const Icon(
                   Icons.shopping_cart,
                   color: Colors.black,

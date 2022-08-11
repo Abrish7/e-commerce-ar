@@ -63,6 +63,9 @@ class ProductFilterItem extends StatelessWidget {
                           width: 20,
                         ),
                         ElevatedButton.icon(
+                          style: ButtonStyle(
+                              backgroundColor:
+                                  MaterialStateProperty.all(Colors.black)),
                           icon: Icon(Icons.shopping_cart),
                           onPressed: () {},
                           label: Text('add to cart'),

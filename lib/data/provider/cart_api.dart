@@ -69,4 +69,23 @@ class CartApi {
       return [];
     }
   }
+
+  Future<dynamic> removeCustomerCartItem(
+      {required customerId, required productId}) async {
+    try {
+      final response = await http.post(
+          Uri.parse(Configurations().getCustomerCartRemoveURL()),
+          headers: {
+            HttpHeaders.contentTypeHeader: 'application/json',
+          },
+          body: jsonEncode(<String, dynamic>{
+            'customerId': customerId,
+            'products': productId
+          }));
+      final data = (jsonDecode(response.body));
+      return data;
+    } catch (e) {
+      return [];
+    }
+  }
 }

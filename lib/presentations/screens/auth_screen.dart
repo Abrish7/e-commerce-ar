@@ -5,6 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../data/model/user_model.dart';
+import '../../logic/auth/cubit/user_cubit.dart';
+
 class AuthScreen extends StatefulWidget {
   AuthScreen({Key? key}) : super(key: key);
 
@@ -32,6 +35,16 @@ class _AuthScreenState extends State<AuthScreen> {
           .add(IsAlreadyLoggedIn(isUserLoggedIn: true));
       BlocProvider.of<CartCubit>(context)
           .getCustomerCart(customerId: profs.getString("id").toString());
+
+      BlocProvider.of<UserCubit>(context).setUserData(User(
+          id: profs.getString("id").toString(),
+          firstname: profs.getString("firstName").toString(),
+          lastname: profs.getString("lastName").toString(),
+          username: profs.getString("username").toString(),
+          email: profs.getString("email").toString(),
+          createAt: profs.getString("updatedAt").toString(),
+          updateAt: profs.getString("createdAt").toString(),
+          token: profs.getString("token").toString()));
     }
   }
 

@@ -27,7 +27,7 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
               child: ElevatedButton.icon(
                 style: ButtonStyle(
                   maximumSize: MaterialStateProperty.all(Size.infinite),
-                  backgroundColor: MaterialStateProperty.all(Colors.blue),
+                  backgroundColor: MaterialStateProperty.all(Colors.black),
                 ),
                 icon: Icon(Icons.camera),
                 onPressed: () {
@@ -68,7 +68,7 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                               maximumSize:
                                   MaterialStateProperty.all(Size.infinite),
                               backgroundColor:
-                                  MaterialStateProperty.all(Colors.blue)),
+                                  MaterialStateProperty.all(Colors.black)),
                           icon: Icon(Icons.shopping_cart),
                           onPressed: () {
                             print("add to cart button pressed");

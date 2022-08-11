@@ -27,17 +27,20 @@ class _CartWidgetState extends State<CartWidget> {
           itemCount: state.cart.length,
           itemBuilder: (context, index) {
             return Container(
-              margin: EdgeInsets.all(5),
-              padding: EdgeInsets.all(5),
-              // ignore: deprecated_member_use
-              child: RaisedButton(
+                margin: EdgeInsets.all(5),
+                padding: EdgeInsets.all(5),
+                // ignore: deprecated_member_use
+                child: RaisedButton(
                   elevation: 0.8,
                   color: Colors.white,
                   onPressed: () {
                     print('all item clicked ... ');
                   },
-                  child: CartItem(index: index)),
-            );
+                  child: CartItem(
+                      index: index, productId: state.cart[index].id.toString()),
+                )
+                // CartItem(index: index, productId: state.cart[index])),
+                );
           });
     }
         //   return const Center(

@@ -1,9 +1,10 @@
 // List of URL FOR EACH END-POINT
 class Configurations {
   // SERVER IP AND PORT NUMBER
-  String apiHost = "192.168.149.52:3000";
+  String apiHost = "192.168.85.125:3000";
   // "192.168.149.52"
   // "192.168.249.171"
+  // "192.168.85.125"
 
   signInURL() => "http://" + apiHost + "/api/customer/login";
 
@@ -23,6 +24,9 @@ class Configurations {
   getCartURL() => "http://" + apiHost + "/api/shopping-cart/add-to-cart";
 
   getCustomerCartURL() => "http://" + apiHost + "/api/shopping-cart/view-cart";
+
+  getCustomerCartRemoveURL() =>
+      "http://" + apiHost + "/api/shopping-cart/remove-item-from-cart";
 
   getCartQuantityUpdateURL() =>
       "http://" + apiHost + "/api/shopping-cart/edit-item-quantity-in-cart";

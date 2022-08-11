@@ -19,6 +19,13 @@ class CartRepository {
     return products.map((e) => CartModel.fromJson(e)).toList();
   }
 
+  Future<bool> removeCustomerCartItem(
+      {required customerId, required productId}) async {
+    final cart = await cartApi.removeCustomerCartItem(
+        customerId: customerId, productId: productId);
+    return true;
+  }
+
   Future<String> updateCartQuantity(
       {required customerId, required productId, required quantity}) async {
     final cart = await cartApi.updateCartQuantity(
@@ -26,4 +33,6 @@ class CartRepository {
     print(cart.toString());
     return cart;
   }
+
+  // removeCustomerCartItem
 }

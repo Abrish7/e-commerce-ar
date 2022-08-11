@@ -36,12 +36,19 @@ class HomeWidget extends StatelessWidget {
           const FilterType(),
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
-            children: const [
+            children: [
               Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'Most viewed item ->',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                padding: EdgeInsets.all(0),
+                child: RaisedButton(
+                  elevation: 0,
+                  color: Colors.white,
+                  onPressed: () {
+                    Navigator.of(context).pushNamed('/product');
+                  },
+                  child: Text(
+                    'Most viewed item ->',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
                 ),
               ),
             ],
@@ -91,7 +98,7 @@ class HomeWidget extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
                 child: Text(
-                  'My Cart',
+                  'Categories',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ),
@@ -197,7 +204,10 @@ class HomeWidget extends StatelessWidget {
               return RaisedButton(
                   elevation: 1,
                   color: Colors.grey[100],
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.of(context)
+                        .pushNamed('/product_detail', arguments: index);
+                  },
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,

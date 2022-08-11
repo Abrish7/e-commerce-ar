@@ -23,7 +23,7 @@ class ProductDetailTopAppBar extends StatelessWidget {
             style: TextStyle(color: Colors.black),
           ),
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.grey),
+            icon: const Icon(Icons.arrow_back, color: Colors.black),
             onPressed: () {
               BlocProvider.of<QuantityCubit>(context).resetQuantityState();
               Navigator.of(context).pushNamed('/product');
@@ -34,13 +34,15 @@ class ProductDetailTopAppBar extends StatelessWidget {
                 buildWhen: (previous, current) => current != previous,
                 builder: (context, cartState) {
                   return Badge(
-                    value: (2).toString(),
+                    value: cartState.cart.length.toString(),
                     color: Color.fromARGB(255, 255, 0, 0),
                     child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/cart');
+                      },
                       icon: const Icon(
                         Icons.shopping_cart,
-                        color: Colors.grey,
+                        color: Colors.black,
                       ),
                     ),
                   );
