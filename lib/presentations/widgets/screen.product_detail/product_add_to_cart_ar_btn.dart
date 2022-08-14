@@ -1,3 +1,4 @@
+import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,6 +15,7 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
   final int index;
   @override
   Widget build(BuildContext context) {
+    late String customerId = "";
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Column(
@@ -73,15 +75,16 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                           onPressed: () {
                             print("add to cart button pressed");
                             BlocProvider.of<CartCubit>(context).addToCart(
-                                customerId: "62db005abbc8bfa29df7c691",
+                                customerId: customerId,
                                 productId: productState.product[index].id,
                                 quantity: 5);
                             print('product loading ...');
+                            print(' Customer ID: ' + customerId);
                             BlocProvider<CartCubit>(
                                 create: (context) => CartCubit(
                                     CartRepository(cartApi: CartApi()))
                                   ..addToCart(
-                                      customerId: "62db005abbc8bfa29df7c691",
+                                      customerId: customerId,
                                       productId: productState.product[index].id,
                                       quantity: 5));
                           },
@@ -100,7 +103,11 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                     });
                   }),
                 )),
-          )
+          ),
+          BlocBuilder<UserCubit, UserState>(builder: ((context, state) {
+            customerId = state.user.id.toString();
+            return Container();
+          }))
         ],
       ),
     );

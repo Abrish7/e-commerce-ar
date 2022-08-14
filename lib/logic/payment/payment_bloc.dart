@@ -23,11 +23,14 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
 
   void _onPaymentCreateIntent(
       PaymentCreateIntent event, Emitter<PaymentState> emit) async {
+    print("Address: " + event.shippingDetails.address.country.toString());
     emit(state.copyWith(status: PaymentStatus.loading));
     final paymentMethod = await Stripe.instance.createPaymentMethod(
         PaymentMethodParams.card(
-            paymentMethodData:
-                PaymentMethodData(billingDetails: event.billingDetails)));
+            paymentMethodData: PaymentMethodData(
+                billingDetails: event.billingDetails,
+                shippingDetails: event.shippingDetails)));
+
     final paymentIntentResults = await _callPayEndPointMethodId(
         useStripeSdk: true,
         paymentMethodId: paymentMethod.id,

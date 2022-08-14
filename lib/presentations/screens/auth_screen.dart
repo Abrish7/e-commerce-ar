@@ -30,7 +30,7 @@ class _AuthScreenState extends State<AuthScreen> {
     print("USER ID: " + profs.getString("id").toString());
 
     print('auth');
-    if (profs.getString("token")!.isNotEmpty) {
+    if (profs.getString("token") == "") {
       BlocProvider.of<AuthBloc>(context)
           .add(IsAlreadyLoggedIn(isUserLoggedIn: true));
       BlocProvider.of<CartCubit>(context)
@@ -65,11 +65,16 @@ class _AuthScreenState extends State<AuthScreen> {
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: Card(
                     borderOnForeground: true,
-                    elevation: 5,
-                    color: Colors.white,
+                    elevation: 0.5,
+                    // color: Colors.white70,
                     child: Padding(
                       padding: const EdgeInsets.only(top: 50),
-                      child: AuthWidget(globalContext: _scaffoldKey),
+                      child: Column(
+                        children: [
+                          Text('Header'),
+                          AuthWidget(globalContext: _scaffoldKey),
+                        ],
+                      ),
                     ),
                   ),
                 ),

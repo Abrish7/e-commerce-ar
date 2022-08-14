@@ -67,15 +67,15 @@ class _CartItemState extends State<CartItem> {
                   style: TextStyle(fontWeight: FontWeight.w400, fontSize: 20),
                 )),
             // Product description
-            Container(
-                padding: EdgeInsets.only(left: 15, top: 5),
-                child: Text(
-                  state.cart[this.widget.index].description,
-                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
-                )),
-            SizedBox(
-              height: 10,
-            ),
+            // Container(
+            //     padding: EdgeInsets.only(left: 15, top: 5),
+            //     child: Text(
+            //       state.cart[this.widget.index].description,
+            //       style: TextStyle(fontWeight: FontWeight.w300, fontSize: 16),
+            //     )),
+            // SizedBox(
+            //   height: 10,
+            // ),
             // pr
             // product quantity
             Row(
@@ -119,7 +119,9 @@ class _CartItemState extends State<CartItem> {
                     return Container(
                         padding: EdgeInsets.only(left: 10),
                         child: Text(
-                          " X " + quantityState.quantity.toString(),
+                          state.cart[this.widget.index].price.toString() +
+                              " X " +
+                              state.cart[this.widget.index].quantity.toString(),
                           style: TextStyle(
                               fontWeight: FontWeight.w300, fontSize: 20),
                           textAlign: TextAlign.left,

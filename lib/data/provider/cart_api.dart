@@ -28,6 +28,7 @@ class CartApi {
   }
 
   Future<List<dynamic>> getCustomerCart({required customerId}) async {
+    print("from API: " + customerId);
     try {
       final response = await http.get(
         Uri.parse(Configurations().getCustomerCartURL() + "/" + customerId),

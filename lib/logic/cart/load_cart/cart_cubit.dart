@@ -15,7 +15,8 @@ class CartCubit extends Cubit<CartState> {
             customerId: customerId, productId: productId, quantity: quantity)
         .then((cart) {
       print("EMITTING CART :" + cart.message);
-      getCustomerCart(customerId: cart.cart.customerId);
+      print("cubit: " + customerId);
+      getCustomerCart(customerId: customerId);
     });
   }
 

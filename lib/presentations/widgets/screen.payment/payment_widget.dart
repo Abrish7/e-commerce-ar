@@ -1,14 +1,15 @@
 import 'package:ecommerce_v3/logic/payment/payment_bloc.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
 class PaymentWidget extends StatelessWidget {
   const PaymentWidget({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    late String customerEmail = "";
+
     return Container(
         alignment: Alignment.center,
         child: BlocBuilder<PaymentBloc, PaymentState>(
@@ -20,6 +21,12 @@ class PaymentWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
+                  BlocBuilder<UserCubit, UserState>(
+                    builder: (context, state) {
+                      customerEmail = state.user.email;
+                      return Container();
+                    },
+                  ),
                   Text(
                     'Stripe Form',
                     style: Theme.of(context).textTheme.headline5,
@@ -46,12 +53,37 @@ class PaymentWidget extends StatelessWidget {
                           (_controller.details.complete)
                               ? context.read<PaymentBloc>().add(
                                     PaymentCreateIntent(
-                                      billingDetails:
-                                          BillingDetails(email: 'ab@gmail.com'),
+                                      billingDetails: BillingDetails(
+                                          address: Address(
+                                              city: "Bahirdar",
+                                              country: "Ethiopia",
+                                              line1: "poly",
+                                              line2: "",
+                                              postalCode: "0000",
+                                              state: ""),
+                                          email: customerEmail,
+                                          phone: "0921093355",
+                                          name: "Abraham"),
+                                      shippingDetails: ShippingDetails(
+                                          address: Address(
+                                              city: "Bahirdar",
+                                              country: "Ethiopia",
+                                              line1: "poly",
+                                              line2: "",
+                                              postalCode: "0000",
+                                              state: "")),
                                       items: [
-                                        {'id': 0},
-                                        {'id': 2},
+                                        {
+                                          'customerId':
+                                              "62db005abbc8bfa29df7c691",
+                                          'productsId': [
+                                            {'id': 2},
+                                            {'id': 3},
+                                            {'id': 4},
+                                          ]
+                                        }
                                       ],
+                                      // {'id': 2},
                                     ),
                                   )
                               : ScaffoldMessenger.of(context).showSnackBar(

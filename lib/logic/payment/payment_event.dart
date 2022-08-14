@@ -11,9 +11,13 @@ class PaymentStart extends PaymentEvent {}
 
 class PaymentCreateIntent extends PaymentEvent {
   final BillingDetails billingDetails;
+  final ShippingDetails shippingDetails;
   final List<Map<String, dynamic>> items;
 
-  PaymentCreateIntent({required this.billingDetails, required this.items});
+  PaymentCreateIntent(
+      {required this.billingDetails,
+      required this.items,
+      required this.shippingDetails});
 
   @override
   List<Object> get props => [billingDetails, items];

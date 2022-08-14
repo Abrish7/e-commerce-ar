@@ -1,13 +1,19 @@
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
+import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+
+import '../../../data/provider/cart_api.dart';
+import '../../../data/repository/cart_repo.dart';
+import '../../../logic/cart/load_cart/cart_cubit.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({Key? key, required this.index}) : super(key: key);
   final int index;
   @override
   Widget build(BuildContext context) {
+    late String customerId = "";
     return Container(
       // padding: EdgeInsets.all(5),
 
@@ -69,7 +75,21 @@ class ProductItem extends StatelessWidget {
                               backgroundColor:
                                   MaterialStateProperty.all(Colors.black)),
                           icon: Icon(Icons.shopping_cart),
-                          onPressed: () {},
+                          onPressed: () {
+                            BlocProvider.of<CartCubit>(context).addToCart(
+                                customerId: customerId,
+                                productId: state.product[index].id,
+                                quantity: 5);
+                            print('product loading ...');
+                            print(' Customer ID: ' + customerId);
+                            BlocProvider<CartCubit>(
+                                create: (context) => CartCubit(
+                                    CartRepository(cartApi: CartApi()))
+                                  ..addToCart(
+                                      customerId: customerId,
+                                      productId: state.product[index].id,
+                                      quantity: 5));
+                          },
                           label: Text('add to cart'),
                         ),
                       ],
@@ -97,7 +117,11 @@ class ProductItem extends StatelessWidget {
                       ),
                     )
                   ],
-                )
+                ),
+                BlocBuilder<UserCubit, UserState>(builder: ((context, state) {
+                  customerId = state.user.id.toString();
+                  return Container();
+                }))
               ],
             );
           }

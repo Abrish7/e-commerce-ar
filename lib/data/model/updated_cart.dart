@@ -11,7 +11,7 @@ class UpdatedCart {
   UpdatedCart.fromJson(Map<String, dynamic> json) {
     message = json['message'];
     cart = Cart.fromJson(json['cart']);
-    subTotal = json['subTotal'];
+    subTotal = double.parse(json['subTotal'].toString());
   }
 
   Map<String, dynamic> toJson() {
