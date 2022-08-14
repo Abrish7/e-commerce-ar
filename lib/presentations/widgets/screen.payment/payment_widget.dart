@@ -9,7 +9,7 @@ class PaymentWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late String customerEmail = "";
-
+    late String customerId = "";
     return Container(
         alignment: Alignment.center,
         child: BlocBuilder<PaymentBloc, PaymentState>(
@@ -24,6 +24,7 @@ class PaymentWidget extends StatelessWidget {
                   BlocBuilder<UserCubit, UserState>(
                     builder: (context, state) {
                       customerEmail = state.user.email;
+                      customerId = state.user.id;
                       return Container();
                     },
                   ),
@@ -73,16 +74,11 @@ class PaymentWidget extends StatelessWidget {
                                               postalCode: "0000",
                                               state: "")),
                                       items: [
-                                        {
-                                          'customerId':
-                                              "62db005abbc8bfa29df7c691",
-                                          'productsId': [
-                                            {'id': 2},
-                                            {'id': 3},
-                                            {'id': 4},
-                                          ]
-                                        }
+                                        {'id': 2},
+                                        {'id': 3},
+                                        {'id': 4},
                                       ],
+                                      customerId: customerId,
                                       // {'id': 2},
                                     ),
                                   )

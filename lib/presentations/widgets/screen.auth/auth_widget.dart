@@ -23,17 +23,14 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white12,
-      child: BlocBuilder<AuthBloc, AuthState>(
-        builder: (context, state) {
-          if (state.isAuthScreenChange == true) {
-            return _signInForm(context);
-          } else {
-            return _signUpForm(context);
-          }
-        },
-      ),
+    return BlocBuilder<AuthBloc, AuthState>(
+      builder: (context, state) {
+        if (state.isAuthScreenChange == true) {
+          return _signInForm(context);
+        } else {
+          return _signUpForm(context);
+        }
+      },
     );
   }
 

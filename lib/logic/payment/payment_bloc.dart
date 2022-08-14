@@ -35,7 +35,8 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
         useStripeSdk: true,
         paymentMethodId: paymentMethod.id,
         currency: 'usd',
-        items: event.items);
+        items: event.items,
+        customerId: event.customerId);
     if (paymentIntentResults['error'] != null) {
       emit(state.copyWith(status: PaymentStatus.failure));
     }
@@ -97,6 +98,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
       {required bool useStripeSdk,
       required String paymentMethodId,
       required String currency,
+      required String customerId,
       List<Map<String, dynamic>>? items}) async {
     final url = Uri.parse(Configurations().getPaymentURL());
 

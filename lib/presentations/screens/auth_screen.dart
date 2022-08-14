@@ -30,7 +30,7 @@ class _AuthScreenState extends State<AuthScreen> {
     print("USER ID: " + profs.getString("id").toString());
 
     print('auth');
-    if (profs.getString("token") == "") {
+    if (profs.getString("token") != "") {
       BlocProvider.of<AuthBloc>(context)
           .add(IsAlreadyLoggedIn(isUserLoggedIn: true));
       BlocProvider.of<CartCubit>(context)
@@ -53,29 +53,26 @@ class _AuthScreenState extends State<AuthScreen> {
     final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       key: _scaffoldKey,
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
+                Container(
+                  child: Column(
+                    children: [Image.asset('assets/images/splash2.jpeg')],
+                  ),
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20),
-                  child: Card(
-                    borderOnForeground: true,
-                    elevation: 0.5,
-                    // color: Colors.white70,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 50),
-                      child: Column(
-                        children: [
-                          Text('Header'),
-                          AuthWidget(globalContext: _scaffoldKey),
-                        ],
-                      ),
-                    ),
+                  padding: const EdgeInsets.only(top: 10),
+                  child: Column(
+                    children: [
+                      AuthWidget(globalContext: _scaffoldKey),
+                    ],
                   ),
                 ),
                 BlocListener<AuthBloc, AuthState>(
@@ -93,8 +90,8 @@ class _AuthScreenState extends State<AuthScreen> {
                 )
               ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
