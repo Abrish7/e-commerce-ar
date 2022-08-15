@@ -2,6 +2,7 @@ import 'package:ecommerce_v3/presentations/common/screen_arguments.dart';
 import 'package:ecommerce_v3/presentations/screens/ar_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/auth_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/cart_screen.dart';
+import 'package:ecommerce_v3/presentations/screens/order_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/payment_type_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_category_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/home_screen.dart';
@@ -13,6 +14,7 @@ import 'package:ecommerce_v3/presentations/screens/product_sub_category_screen.d
 import 'package:ecommerce_v3/presentations/screens/profile_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/search_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/setting_screen.dart';
+import 'package:ecommerce_v3/presentations/screens/shipping_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/payment_screen.dart';
@@ -35,6 +37,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => HomeScreen());
       case '/main':
         return MaterialPageRoute(builder: (_) => MainScreen());
+      case '/order':
+        return MaterialPageRoute(builder: (_) => OrderScreen());
       case '/profile':
         return MaterialPageRoute(builder: (_) => ProfileScreen());
       case '/product':
@@ -57,6 +61,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const SearchScreen());
       case '/setting':
         return MaterialPageRoute(builder: (_) => const SettingScreen());
+      case '/shipping':
+        return MaterialPageRoute(builder: (_) => const ShippingScreen());
       default:
         return errorRoute();
     }

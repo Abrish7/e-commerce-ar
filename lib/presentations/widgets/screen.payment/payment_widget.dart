@@ -1,8 +1,12 @@
 import 'package:ecommerce_v3/logic/payment/payment_bloc.dart';
 import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
+import 'package:ecommerce_v3/presentations/widgets/screen.shipping/shipping_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+
+import '../../../logic/order/order_cubit.dart';
+import '../../../logic/shipping/shipping_bloc.dart';
 
 class PaymentWidget extends StatelessWidget {
   const PaymentWidget({Key? key}) : super(key: key);
@@ -10,6 +14,7 @@ class PaymentWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     late String customerEmail = "";
     late String customerId = "";
+    late String name = "";
     return Container(
         alignment: Alignment.center,
         child: BlocBuilder<PaymentBloc, PaymentState>(
@@ -25,6 +30,8 @@ class PaymentWidget extends StatelessWidget {
                     builder: (context, state) {
                       customerEmail = state.user.email;
                       customerId = state.user.id;
+
+                      name = state.user.firstname + ' ' + state.user.lastname;
                       return Container();
                     },
                   ),
@@ -39,8 +46,9 @@ class PaymentWidget extends StatelessWidget {
                     controller: _controller,
                     style: CardFormStyle(
                         backgroundColor: Colors.black,
+                        borderRadius: 10,
                         textColor: Colors.white,
-                        placeholderColor: Colors.grey.shade50,
+                        placeholderColor: Colors.grey,
                         fontSize: 16),
                   ),
                   const SizedBox(
@@ -48,49 +56,56 @@ class PaymentWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                        onPressed: () {
-                          print('All Data ' + _controller.details.toString());
-                          (_controller.details.complete)
-                              ? context.read<PaymentBloc>().add(
-                                    PaymentCreateIntent(
-                                      billingDetails: BillingDetails(
-                                          address: Address(
-                                              city: "Bahirdar",
-                                              country: "Ethiopia",
-                                              line1: "poly",
-                                              line2: "",
-                                              postalCode: "0000",
-                                              state: ""),
-                                          email: customerEmail,
-                                          phone: "0921093355",
-                                          name: "Abraham"),
-                                      shippingDetails: ShippingDetails(
-                                          address: Address(
-                                              city: "Bahirdar",
-                                              country: "Ethiopia",
-                                              line1: "poly",
-                                              line2: "",
-                                              postalCode: "0000",
-                                              state: "")),
-                                      items: [
-                                        {'id': 2},
-                                        {'id': 3},
-                                        {'id': 4},
-                                      ],
-                                      customerId: customerId,
-                                      // {'id': 2},
-                                    ),
-                                  )
-                              : ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('The form is not complete.')));
-                        },
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all(Colors.black)),
-                        child: Text('Pay')),
+                    child: BlocBuilder<ShippingBloc, ShippingState>(
+                      builder: (context, state) {
+                        return ElevatedButton(
+                            onPressed: () {
+                              print(
+                                  'All Data ' + _controller.details.toString());
+                              (_controller.details.complete)
+                                  ? context.read<PaymentBloc>().add(
+                                        PaymentCreateIntent(
+                                          billingDetails: BillingDetails(
+                                              address: Address(
+                                                  city: state.city.value,
+                                                  country: state.country.value,
+                                                  line1: state.line.value,
+                                                  line2: state.line2.value,
+                                                  postalCode: state
+                                                      .postalCodeInput.value,
+                                                  state: ""),
+                                              email: customerEmail,
+                                              phone: state.phone.value,
+                                              name: name),
+                                          shippingDetails: ShippingDetails(
+                                              address: Address(
+                                                  city: state.city.value,
+                                                  country: state.country.value,
+                                                  line1: state.line.value,
+                                                  line2: state.line2.value,
+                                                  postalCode: state
+                                                      .postalCodeInput.value,
+                                                  state: "")),
+                                          items: [
+                                            {'id': 2},
+                                            {'id': 3},
+                                            {'id': 4},
+                                          ],
+                                          customerId: customerId,
+                                          // {'id': 2},
+                                        ),
+                                      )
+                                  : ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                          content: Text(
+                                              'The form is not complete.')));
+                            },
+                            style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(Colors.orange)),
+                            child: Text('Pay'));
+                      },
+                    ),
                   )
                 ],
               );
@@ -109,7 +124,8 @@ class PaymentWidget extends StatelessWidget {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        context.read<PaymentBloc>().add(PaymentStart());
+                        BlocProvider.of<OrderCubit>(context)..getOrder();
+                        Navigator.pushNamed(context, '/order');
                       },
                       style: ButtonStyle(
                           backgroundColor:

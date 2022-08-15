@@ -1,11 +1,11 @@
 // List of URL FOR EACH END-POINT
 class Configurations {
-  // SERVER IP AND PORT NUMBER
+// SERVER IP AND PORT NUMBER
   String apiHost = "haleta-eshop.herokuapp.com";
-  // String apiHost = "192.168.212.171:3000";
-  // "192.168.149.52"
-  // "192.168.249.171"
-  // "192.168.85.125"
+  // String apiHost = "192.168.212.171:3001";
+// "192.168.149.52"
+// "192.168.249.171"
+// "192.168.85.125"
 
   signInURL() => "http://" + apiHost + "/api/customer/login";
 
@@ -40,4 +40,6 @@ class Configurations {
       "http://" + apiHost + "/api/payment/create-payment-intent-flutter";
 
   getPaymentIntentURL() => "http://" + apiHost + "/api/payment/test";
+
+  getOrderUrl() => "http://" + apiHost + "/api/orders/fetch-order";
 }

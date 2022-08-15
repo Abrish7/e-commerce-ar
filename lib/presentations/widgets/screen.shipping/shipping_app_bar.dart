@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../logic/cart/load_cart/cart_cubit.dart';
 import '../../common/badge.dart';
 
-class ProductSubCategoryTopAppBar extends StatelessWidget {
-  const ProductSubCategoryTopAppBar({Key? key}) : super(key: key);
+class ShippingAppBar extends StatelessWidget {
+  const ShippingAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +16,13 @@ class ProductSubCategoryTopAppBar extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
-          'Sub category',
+          'shipping information',
           style: TextStyle(color: Colors.black),
         ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.of(context).pushNamed("/home");
+            Navigator.of(context).pushNamed('/cart');
           },
         ),
         actions: [

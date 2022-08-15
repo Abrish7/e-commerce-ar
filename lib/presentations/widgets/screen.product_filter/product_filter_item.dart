@@ -74,19 +74,11 @@ class ProductFilterItem extends StatelessWidget {
                                   MaterialStateProperty.all(Colors.black)),
                           icon: Icon(Icons.shopping_cart),
                           onPressed: () {
+                            print('add to cart ');
                             BlocProvider.of<CartCubit>(context).addToCart(
                                 customerId: customerId,
                                 productId: state.product[index].id,
-                                quantity: 5);
-                            print('product loading ...');
-                            print(' Customer ID: ' + customerId);
-                            BlocProvider<CartCubit>(
-                                create: (context) => CartCubit(
-                                    CartRepository(cartApi: CartApi()))
-                                  ..addToCart(
-                                      customerId: customerId,
-                                      productId: state.product[index].id,
-                                      quantity: 5));
+                                quantity: 1);
                           },
                           label: Text('add to cart'),
                         ),

@@ -57,38 +57,29 @@ class _AuthScreenState extends State<AuthScreen> {
       key: _scaffoldKey,
       body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  child: Column(
-                    children: [Image.asset('assets/images/splash2.jpeg')],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10),
-                  child: Column(
-                    children: [
-                      AuthWidget(globalContext: _scaffoldKey),
-                    ],
-                  ),
-                ),
-                BlocListener<AuthBloc, AuthState>(
-                  listenWhen: (previous, current) =>
-                      previous.isAlreadyLoggedIn != current.isAlreadyLoggedIn,
-                  listener: (context, state) {
-                    if (state.isAlreadyLoggedIn) {
-                      Navigator.of(context).pushNamed("/home");
-                    } else {
-                      print("user logged out");
-                      Navigator.of(context).pushNamed("/");
-                    }
-                  },
-                  child: Container(),
-                )
-              ],
+            SizedBox(
+              height: 100,
+            ),
+            Container(
+              child: Image.asset('assets/images/splash2.jpeg'),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: AuthWidget(globalContext: _scaffoldKey),
+            ),
+            BlocListener<AuthBloc, AuthState>(
+              listenWhen: (previous, current) =>
+                  previous.isAlreadyLoggedIn != current.isAlreadyLoggedIn,
+              listener: (context, state) {
+                if (state.isAlreadyLoggedIn) {
+                  Navigator.of(context).pushNamed("/home");
+                } else {
+                  print("user logged out");
+                  Navigator.of(context).pushNamed("/");
+                }
+              },
+              child: Container(),
             ),
           ],
         ),

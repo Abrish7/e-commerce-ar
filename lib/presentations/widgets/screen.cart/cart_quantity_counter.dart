@@ -79,7 +79,7 @@ class CartQuantityCounter extends StatelessWidget {
               BlocProvider.of<CartCubit>(context).updateCart(
                   // customerId: customerId,
                   productId: productId,
-                  quantity: quantity + 1);
+                  quantity: quantity - 1);
               // BlocProvider.of<QuantityCubit>(context).decreaseQuantityState(
               //     customerId: this.customerId,
               //     quantity: quantity,

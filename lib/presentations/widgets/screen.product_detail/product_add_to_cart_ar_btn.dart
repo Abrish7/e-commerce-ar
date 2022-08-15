@@ -16,6 +16,7 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     late String customerId = "";
+
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Column(
@@ -56,7 +57,6 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
           Container(
             padding: EdgeInsets.only(left: 30, right: 30),
             child: SizedBox(
-                // height: 30,
                 width: double.infinity,
                 child: BlocBuilder<ProductCubit, ProductState>(
                   builder: ((context, productState) {
@@ -65,6 +65,10 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                         builder: (context, quantityState) {
                       return BlocBuilder<CartCubit, CartState>(
                           builder: (context, cartState) {
+                        // BlocProvider.of<CartCubit>(context).addToCart(
+                        //     customerId: customerId,
+                        //     productId: productState.product[index].id,
+                        //     quantity: 1);
                         return ElevatedButton.icon(
                           style: ButtonStyle(
                               maximumSize:
@@ -77,16 +81,7 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                             BlocProvider.of<CartCubit>(context).addToCart(
                                 customerId: customerId,
                                 productId: productState.product[index].id,
-                                quantity: 5);
-                            print('product loading ...');
-                            print(' Customer ID: ' + customerId);
-                            BlocProvider<CartCubit>(
-                                create: (context) => CartCubit(
-                                    CartRepository(cartApi: CartApi()))
-                                  ..addToCart(
-                                      customerId: customerId,
-                                      productId: productState.product[index].id,
-                                      quantity: 5));
+                                quantity: quantityState.quantity);
                           },
                           label: Padding(
                             padding: const EdgeInsets.all(20.0),

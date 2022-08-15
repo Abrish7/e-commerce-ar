@@ -1,4 +1,5 @@
 import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
+import 'package:ecommerce_v3/logic/order/order_cubit.dart';
 import 'package:ecommerce_v3/presentations/screens/home_screen.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.main/drawer.dart';
 import 'package:flutter/gestures.dart';
@@ -27,9 +28,6 @@ class _MainScreenState extends State<MainScreen> {
     Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
     SharedPreferences profs = await _prefs;
     print("USER ID: " + profs.getString("id").toString());
-    // print('auth widget..');
-    // if (profs.getString("token")!.isNotEmpty) {
-    //   print('first name value0: ' + profs.getString("firstName")!);
     BlocProvider.of<UserCubit>(context).setUserData(User(
         id: profs.getString("id").toString(),
         firstname: profs.getString("firstName").toString(),

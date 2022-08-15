@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:ecommerce_v3/config.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CartApi {
   // final String getURL = "http://localhost:3000/api/shopping-cart/add-to-cart";
@@ -37,6 +38,12 @@ class CartApi {
         },
       );
       final data = (jsonDecode(response.body)['cart'][0]['products'] as List);
+      final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
+      final SharedPreferences prefs = await _prefs;
+      String store = (jsonDecode(response.body)['subTotal'].toString());
+      prefs.setString('cartTotal', store);
+      // prefs.setString(
+      //     'cartTotal', (jsonDecode(response.body).subTotal).toString());
       // print('new products' + data[0].toString());
       return data;
     } catch (e) {
@@ -81,7 +88,7 @@ class CartApi {
           },
           body: jsonEncode(<String, dynamic>{
             'customerId': customerId,
-            'products': productId
+            'productId': productId
           }));
       final data = (jsonDecode(response.body));
       return data;

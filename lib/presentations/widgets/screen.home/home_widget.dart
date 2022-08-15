@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:ecommerce_v3/data/model/product_model.dart';
+import 'package:ecommerce_v3/logic/category/product_category_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.home/filter_type.dart';
+import 'package:ecommerce_v3/presentations/widgets/screen.home/home_category_item.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.home/item.dart';
 import 'package:ecommerce_v3/presentations/common/skeloton.dart';
 import 'package:flutter/material.dart';
@@ -79,15 +81,14 @@ class HomeWidget extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.all(2),
                     // ignore: deprecated_member_use
                     child: RaisedButton(
+                      color: Colors.grey[100],
                       elevation: 0.5,
                       child: const ListItem(
                         index: 0,
                       ),
                       onPressed: () {},
-                      color: Colors.white,
                     ),
                   );
                 }),
@@ -96,7 +97,7 @@ class HomeWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: const [
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+                padding: EdgeInsets.all(10),
                 child: Text(
                   'Categories',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -104,25 +105,45 @@ class HomeWidget extends StatelessWidget {
               ),
             ],
           ),
-          SizedBox(
-            height: 300,
+          Container(
+            color: Colors.grey[100],
+            height: 400,
             width: MediaQuery.of(context).size.width,
-            child: ListView.builder(
-                shrinkWrap: true,
-                scrollDirection: Axis.horizontal,
-                itemCount: 5,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: const EdgeInsets.all(2.0),
-                    // ignore: deprecated_member_use
-                    child: RaisedButton(
-                      elevation: .5,
-                      color: Colors.white,
-                      child: cartSkeleton(),
-                      onPressed: () => null,
+            child: BlocBuilder<ProductCategoryCubit, ProductCategoryState>(
+              builder: (context, category) {
+                if (category is ProductCategoryLoaded) {
+                  return GridView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: category.category.length,
+                    gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 300,
                     ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Center(
+                        child: HomeCategoryItem(
+                            index: index, name: category.category[index].name),
+                      );
+                    },
                   );
-                }),
+                }
+                return ListView.builder(
+                    shrinkWrap: true,
+                    // scrollDirection: Axis.vertical,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        // padding: const EdgeInsets.all(2.0),
+                        // ignore: deprecated_member_use
+                        child: RaisedButton(
+                          elevation: .5,
+                          color: Colors.white,
+                          child: cartSkeleton(),
+                          onPressed: () => null,
+                        ),
+                      );
+                    });
+              },
+            ),
           ),
         ],
       ),

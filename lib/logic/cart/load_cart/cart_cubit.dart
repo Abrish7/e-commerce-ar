@@ -9,7 +9,6 @@ class CartCubit extends Cubit<CartState> {
 
   void addToCart(
       {required customerId, required productId, required quantity}) async {
-    print("ADD TO CART TRIGGERED");
     await cartRepository
         .addToCart(
             customerId: customerId, productId: productId, quantity: quantity)
@@ -30,11 +29,11 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void removeCustomerCartItem({required customerId, required productId}) async {
-    print("REMOVE CUSTOMER CART ITEM :) ");
+    print("REMOVING CUSTOMER CART ITEM ... ");
     await cartRepository
         .removeCustomerCartItem(customerId: customerId, productId: productId)
         .then((cart) {
-      print("ITEM REMOVED FROM CART : " + cart.toString());
+      print("SUCCEEDED: " + cart.toString());
       if (cart == true) {
         print("customer ID : " + customerId.toString());
         print("product  ID : " + productId.toString());

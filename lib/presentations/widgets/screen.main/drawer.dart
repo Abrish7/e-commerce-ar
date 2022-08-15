@@ -29,7 +29,7 @@ class DrawerWidget extends StatelessWidget {
                   image: DecorationImage(
                       image:
                           Image.asset('assets/images/drawerHeader.jpg').image,
-                      fit: BoxFit.cover),
+                      fit: BoxFit.fill),
                 ),
               );
             },

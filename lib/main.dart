@@ -7,11 +7,14 @@ import 'package:ecommerce_v3/data/repository/product_repo.dart';
 import 'package:ecommerce_v3/logic/auth/bloc/auth_bloc.dart';
 import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
 import 'package:ecommerce_v3/logic/cart/favorite_cubit.dart';
+import 'package:ecommerce_v3/logic/cart/total_cart_cubit.dart';
 import 'package:ecommerce_v3/logic/home/bottom_app_bar_cubit.dart';
+import 'package:ecommerce_v3/logic/order/order_cubit.dart';
 import 'package:ecommerce_v3/logic/other/like_cubit.dart';
 import 'package:ecommerce_v3/logic/payment/payment_bloc.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_filter_by_category_cubit.dart';
+import 'package:ecommerce_v3/logic/shipping/shipping_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -69,7 +72,13 @@ class MyApp extends StatelessWidget {
         // Product Favorite Cubit
         BlocProvider<FavoriteCubit>(create: (context) => FavoriteCubit()),
         // Payment Bloc
-        BlocProvider<PaymentBloc>(create: (context) => PaymentBloc())
+        BlocProvider<PaymentBloc>(create: (context) => PaymentBloc()),
+        // Shipping form Bloc
+        BlocProvider<ShippingBloc>(create: (context) => ShippingBloc()),
+        // Total Cart Cubit
+        BlocProvider<TotalCartCubit>(create: (context) => TotalCartCubit()),
+        // Order Cubit
+        BlocProvider<OrderCubit>(create: (context) => OrderCubit())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

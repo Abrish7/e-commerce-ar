@@ -9,7 +9,7 @@ class ListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // padding: EdgeInsets.all(5),
+      padding: EdgeInsets.only(top: 5, bottom: 5),
       child: BlocBuilder<ProductCubit, ProductState>(
         builder: (context, state) {
           return BlocBuilder<ProductCubit, ProductState>(

@@ -23,14 +23,16 @@ class _AuthWidgetState extends State<AuthWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<AuthBloc, AuthState>(
-      builder: (context, state) {
-        if (state.isAuthScreenChange == true) {
-          return _signInForm(context);
-        } else {
-          return _signUpForm(context);
-        }
-      },
+    return Container(
+      child: BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          if (state.isAuthScreenChange == true) {
+            return _signInForm(context);
+          } else {
+            return _signUpForm(context);
+          }
+        },
+      ),
     );
   }
 
@@ -242,7 +244,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       return current.isAuthScreenChange == previous.isAuthScreenChange;
     }, listener: (context, state) {
       if (state.status == FormzStatus.submissionSuccess) {
-        Navigator.of(context).pushNamed('/main');
+        Navigator.of(context).pushNamed('/');
       }
       if (state.status == FormzStatus.submissionCanceled) {
         setState(() {
@@ -258,13 +260,13 @@ class _AuthWidgetState extends State<AuthWidget> {
           signUpButton = _buttonTextWithLoadingCircle();
         });
       }
-      if (state.status == FormzStatus.submissionFailure) {
-        setState(() {
-          dialogPage = _showMyDialog(
-              title: 'Form Error',
-              description: 'Please check your form and try again.');
-        });
-      }
+      // if (state.status == FormzStatus.submissionFailure) {
+      //   setState(() {
+      //     dialogPage = _showMyDialog(
+      //         title: 'Form Error',
+      //         description: 'Please check your form and try again.');
+      //   });
+      // }
       if (state.isConnectionOn) {
         setState(() {
           signUpButton = const Text('Sign up');
@@ -300,14 +302,14 @@ class _AuthWidgetState extends State<AuthWidget> {
       if (state.status == FormzStatus.submissionSuccess) {
         Navigator.of(context).pushNamed('/main');
       }
-      if (state.status == FormzStatus.submissionCanceled) {
-        setState(() {
-          dialogPage = _showMyDialog(
-              title: 'User Already Exist',
-              description: 'this email or username already exist.',
-              description2: "try again with different email or username.");
-        });
-      }
+      // if (state.status == FormzStatus.submissionCanceled) {
+      //   setState(() {
+      //     dialogPage = _showMyDialog(
+      //         title: 'User Already Exist',
+      //         description: 'this email or username already exist.',
+      //         description2: "try again with different email or username.");
+      //   });
+      // }
 
       if (state.status == FormzStatus.submissionInProgress) {
         setState(() {
