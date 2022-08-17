@@ -42,4 +42,9 @@ class Configurations {
   getPaymentIntentURL() => "http://" + apiHost + "/api/payment/test";
 
   getOrderUrl() => "http://" + apiHost + "/api/orders/fetch-order";
+
+  getTagProductUrl() =>
+      "http://" + apiHost + "/api/products/fetch-products-by-tags";
+
+  getTagUrl() => "http://" + apiHost + "/api/products/fetch-product-tags";
 }

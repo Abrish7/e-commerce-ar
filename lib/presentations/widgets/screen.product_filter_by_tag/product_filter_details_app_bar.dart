@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../logic/cart/load_cart/cart_cubit.dart';
 import '../../common/badge.dart';
 
-class ProductFilterTopAppBar extends StatelessWidget {
-  const ProductFilterTopAppBar({Key? key}) : super(key: key);
-  @override
-  // ignore: todo
-  // TODO: implement preferredSize
+class ProductFilterDetailsByTagAppBar extends StatelessWidget {
+  const ProductFilterDetailsByTagAppBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -17,12 +18,14 @@ class ProductFilterTopAppBar extends StatelessWidget {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () {
-          Navigator.of(context).pushNamed('/subCategory');
+          Navigator.of(context).pushNamed('/product_filter_by_tag');
         },
       ),
       actions: [
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              //  Navigator.of(context).pushNamed('/home');
+            },
             icon: const Icon(
               Icons.search,
               color: Colors.black,
@@ -46,18 +49,5 @@ class ProductFilterTopAppBar extends StatelessWidget {
             })
       ],
     );
-  }
-
-  Future<dynamic> shoppingCartDialogue(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (ctx) => AlertDialog(
-              title: const Text("shopping cart"),
-              content: SingleChildScrollView(
-                  child: Column(
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: const <Widget>[Text('data')],
-              )),
-            ));
   }
 }

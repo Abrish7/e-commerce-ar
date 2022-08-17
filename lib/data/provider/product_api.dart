@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 
 class ProductApi {
   final getURL = "http://192.168.149.52:3000/api/products/fetch-products";
-  final LIMIT = 10;
+  final LIMIT = 20;
 
   Future<List<dynamic>> getProduct({required int page}) async {
     try {

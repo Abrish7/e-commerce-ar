@@ -1,4 +1,5 @@
 import 'package:ecommerce_v3/config.dart';
+import 'package:ecommerce_v3/data/model/tag_product.dart';
 import 'package:ecommerce_v3/data/provider/cart_api.dart';
 import 'package:ecommerce_v3/data/provider/product_filter_by_category_api.dart';
 import 'package:ecommerce_v3/data/repository/cart_repo.dart';
@@ -15,6 +16,8 @@ import 'package:ecommerce_v3/logic/payment/payment_bloc.dart';
 import 'package:ecommerce_v3/logic/product/product_cubit.dart';
 import 'package:ecommerce_v3/logic/product/product_filter_by_category_cubit.dart';
 import 'package:ecommerce_v3/logic/shipping/shipping_bloc.dart';
+import 'package:ecommerce_v3/logic/tag/tag_cubit.dart';
+import 'package:ecommerce_v3/logic/tag/tag_product_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -78,7 +81,11 @@ class MyApp extends StatelessWidget {
         // Total Cart Cubit
         BlocProvider<TotalCartCubit>(create: (context) => TotalCartCubit()),
         // Order Cubit
-        BlocProvider<OrderCubit>(create: (context) => OrderCubit())
+        BlocProvider<OrderCubit>(create: (context) => OrderCubit()),
+        // Tag Cubit
+        BlocProvider<TagCubit>(create: (context) => TagCubit()..getTag()),
+        // Tag product Cubit
+        BlocProvider<TagProductCubit>(create: (context) => TagProductCubit())
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

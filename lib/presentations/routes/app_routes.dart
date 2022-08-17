@@ -7,6 +7,7 @@ import 'package:ecommerce_v3/presentations/screens/payment_type_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_category_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/home_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_detail_screen.dart';
+import 'package:ecommerce_v3/presentations/screens/product_filter_by_tag_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_filter_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/main_screen.dart';
@@ -18,6 +19,7 @@ import 'package:ecommerce_v3/presentations/screens/shipping_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/payment_screen.dart';
+import '../screens/product_filter_detail_screen.dart';
 
 class AppRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
@@ -48,9 +50,16 @@ class AppRoutes {
             builder: (_) => ProductFilterScreen(
                 category: (category as Category).category,
                 subCategory: (category).subCategory));
+      case '/product_filter_by_tag':
+        return MaterialPageRoute(
+            builder: (_) => const ProductFilterByTagScreen());
       case '/product_detail':
         return MaterialPageRoute(
             builder: (_) => ProductDetailScreen(index: args as int));
+      case '/product_filter_detail':
+        return MaterialPageRoute(
+            builder: (_) => ProductFilterDetailScreen(index: args as int));
+
       case '/payment_type':
         return MaterialPageRoute(builder: (_) => PaymentTypeScreen());
       case '/payment':

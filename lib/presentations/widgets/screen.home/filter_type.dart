@@ -1,4 +1,7 @@
+import 'package:ecommerce_v3/logic/tag/tag_cubit.dart';
+import 'package:ecommerce_v3/logic/tag/tag_product_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class FilterType extends StatefulWidget {
   const FilterType({Key? key}) : super(key: key);
@@ -22,22 +25,31 @@ class _FilterTypeState extends State<FilterType> {
   Padding categoryBuilder() {
     return Padding(
         padding: const EdgeInsets.all(5),
-        child: SizedBox(height: 50, child: FutureForCategoryList()));
+        child: SizedBox(height: 50, child: ListViewForCategoryList()));
   }
 
-  ListView FutureForCategoryList() {
-    final List<String> filterBy = ["Selling", "Deals", "Category", "Saved"];
+  // ListView FutureForCategoryList() {
+  //   final List<String> filterBy = ["Selling", "Deals", "Category", "Saved"];
 
-    return ListViewForCategoryList(filterBy);
-  }
+  //   return ListViewForCategoryList(filterBy);
+  // }
 
-  ListView ListViewForCategoryList(List<String> data) {
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return builtCategory(index, context, data);
-        });
+  BlocBuilder<TagCubit, TagState> ListViewForCategoryList() {
+    return BlocBuilder<TagCubit, TagState>(
+      builder: (context, state) {
+        if (state is TagLoaded) {
+          return ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: state.tags.length,
+              itemBuilder: (context, index) {
+                return builtCategory(index, context, state.tags[index].tagName);
+              });
+        }
+        return Center(
+          child: CircularProgressIndicator(),
+        );
+      },
+    );
   }
 
   Widget builtCategory(index, context, data) {
@@ -56,18 +68,7 @@ class _FilterTypeState extends State<FilterType> {
 
   Column bindingDataForCategoryList(data, index) {
     Icon iconType = const Icon(Icons.sell);
-    if (data[index] == "Selling") {
-      iconType = const Icon(Icons.sell);
-    }
-    if (data[index] == "Deals") {
-      iconType = const Icon(Icons.handshake);
-    }
-    if (data[index] == "Category") {
-      iconType = const Icon(Icons.category);
-    }
-    if (data[index] == "Saved") {
-      iconType = const Icon(Icons.favorite);
-    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -77,13 +78,13 @@ class _FilterTypeState extends State<FilterType> {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           elevation: 0,
           onPressed: () {
-            if (data[index] == "Category") {
-              Navigator.of(context).pushNamed("/category", arguments: index);
-            }
+            BlocProvider.of<TagProductCubit>(context)
+                .getTagProduct(tagName: data);
+            Navigator.of(context).pushNamed("/product_filter_by_tag");
           },
           icon: (iconType),
           label: Text(
-            data[index],
+            data,
             style: const TextStyle(
                 fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black),
           ),

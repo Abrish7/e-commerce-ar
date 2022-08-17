@@ -15,17 +15,9 @@ class ProductFilterByCategoryCubit extends Cubit<ProductFilterByCategoryState> {
   final ProductFilterByCategoryRepo repository;
 
   void loadProduct({required String category, required String subCategory}) {
-    // print('loading product...');
-    // print(category);
-    // print(subCategory);
-    // if (state is ProductFilterByCategoryLoading) return;
-
-    // final currentState = state;
-    // var oldProduct = <Product>[];
-
-    // if (currentState is ProductFilterByCategoryLoaded) {
-    //   oldProduct = currentState.product;
-    // }
+    print('loading product...');
+    print('category ' + category);
+    print('sub category ' + subCategory);
 
     emit(ProductFilterByCategoryLoading(
         oldProducts: [], isFirstFetch: page == 1));
