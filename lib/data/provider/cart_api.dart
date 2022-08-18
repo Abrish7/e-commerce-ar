@@ -37,6 +37,7 @@ class CartApi {
           HttpHeaders.contentTypeHeader: 'application/json',
         },
       );
+      // print('cart: ' + jsonDecode(response.body)['cart'].toString());
       final data = (jsonDecode(response.body)['cart'][0]['products'] as List);
       final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
       final SharedPreferences prefs = await _prefs;

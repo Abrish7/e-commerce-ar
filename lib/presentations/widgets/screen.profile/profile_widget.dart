@@ -23,7 +23,7 @@ class ProfileWidget extends StatelessWidget {
           SizedBox(
             height: 24,
           ),
-          _buildName()
+          _buildName(),
         ],
       ),
     );
@@ -34,15 +34,47 @@ class ProfileWidget extends StatelessWidget {
       builder: (context, state) {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              '${state.user.firstname} ${state.user.lastname}',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Full name: ',
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+                ),
+                Text(
+                  '${state.user.firstname} ${state.user.lastname}',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                ),
+              ],
             ),
-            Text(
-              '${state.user.email}',
-              style: TextStyle(color: Colors.grey),
-            )
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Email: ',
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+                ),
+                Text(
+                  '${state.user.email}',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Username: ',
+                  style: TextStyle(fontWeight: FontWeight.w300, fontSize: 18),
+                ),
+                Text(
+                  '${state.user.username}',
+                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 18),
+                ),
+              ],
+            ),
           ],
         );
       },

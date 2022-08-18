@@ -41,21 +41,22 @@ class CartBottomSheet extends StatelessWidget {
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
                 ),
               ),
-              BlocBuilder<CartCubit, CartState>(builder: (context, state) {
-                // if (state is CartLoaded) {
-                // state.cart.subTotal.toStringAsFixed(2)
-                _getTotalCartSize(context);
-                return BlocBuilder<TotalCartCubit, TotalCartState>(
-                  builder: (context, state) {
-                    return Text(state.total,
-                        style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w300));
-                  },
-                );
-              }
-                  // return CircularProgressIndicator();
-                  // },
-                  )
+              // BlocBuilder<CartCubit, CartState>(builder: (context, state) {
+              // if (state is CartLoaded) {
+              // state.cart.subTotal.toStringAsFixed(2)
+
+              // _getTotalCartSize(context);
+              BlocBuilder<TotalCartCubit, TotalCartState>(
+                builder: (context, totalSt) {
+                  print('widget: ' + totalSt.total.toString());
+                  return Text(totalSt.total,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w300));
+                },
+              )
+              // }
+              // return CircularProgressIndicator();
+              // },
             ],
           ),
           RaisedButton(

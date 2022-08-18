@@ -5,7 +5,8 @@ class ProfileImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final image = AssetImage("assets/images/splash2.jpg");
+    final image = NetworkImage(
+        "https://st3.depositphotos.com/6672868/13701/v/450/depositphotos_137014128-stock-illustration-user-profile-icon.jpg");
 
     return Stack(
       children: [
@@ -15,7 +16,7 @@ class ProfileImage extends StatelessWidget {
     );
   }
 
-  ClipOval _profileImage(AssetImage image) {
+  ClipOval _profileImage(NetworkImage image) {
     return ClipOval(
       child: Material(
         color: Colors.transparent,

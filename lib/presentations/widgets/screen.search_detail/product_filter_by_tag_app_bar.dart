@@ -1,42 +1,39 @@
-import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
-import 'package:ecommerce_v3/logic/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../common/badge.dart';
-import '../screen.search/search_widget.dart';
 
-class HomeTopAppBar extends StatelessWidget {
-  HomeTopAppBar({Key? key, required this.scaffoldKey}) : super(key: key);
-  final GlobalKey<ScaffoldState> scaffoldKey;
+import '../../../logic/cart/load_cart/cart_cubit.dart';
+import '../../common/badge.dart';
+
+class ProductFilterByTagAppBar extends StatelessWidget {
+  const ProductFilterByTagAppBar({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return SliverAppBar(
-      pinned: true,
-      floating: true,
-      snap: true,
-      // toolbarHeight: 300.0,
-      backgroundColor: Colors.white,
-      elevation: 0,
-      title: const Text(
-        'e-shop',
+    return AppBar(
+      title: Text(
+        'products',
         style: TextStyle(color: Colors.black),
       ),
+      toolbarHeight: 300.0,
+      backgroundColor: Colors.white,
+      elevation: 0,
       leading: IconButton(
-        icon: const Icon(Icons.menu, color: Colors.black),
+        icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () {
-          scaffoldKey.currentState!.openDrawer();
+          Navigator.of(context).pushNamed('/home');
         },
       ),
       actions: [
         IconButton(
-          onPressed: () {
-            Navigator.pushNamed(context, '/search');
-          },
-          icon: const Icon(
-            Icons.search,
-            color: Colors.black,
-          ),
-        ),
+            onPressed: () {
+              //  Navigator.of(context).pushNamed('/home');
+            },
+            icon: const Icon(
+              Icons.search,
+              color: Colors.black,
+            )),
         BlocBuilder<CartCubit, CartState>(
             buildWhen: (previous, current) => current != previous,
             builder: (context, cartState) {
@@ -55,7 +52,6 @@ class HomeTopAppBar extends StatelessWidget {
               );
             })
       ],
-      // bottom: TabBar(tabs: [FilterType()])
     );
   }
 }

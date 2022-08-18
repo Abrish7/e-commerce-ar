@@ -1,10 +1,13 @@
-import 'package:ecommerce_v3/logic/cubit/search_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../../../logic/cubit/search_cubit.dart';
 import '../../common/theme_helper.dart';
 
-class SearchTopAppBar extends StatelessWidget {
-  const SearchTopAppBar({Key? key}) : super(key: key);
+class SearchDetailTopAppBar extends StatelessWidget {
+  const SearchDetailTopAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +19,7 @@ class SearchTopAppBar extends StatelessWidget {
         autofocus: true,
         obscureText: false,
         decoration: ThemeHelper().searchInputDecoration(
-            'Search', '', '', false, const Icon(Icons.search)),
+            'product detail', '', '', false, const Icon(Icons.search)),
         onChanged: (value) {
           BlocProvider.of<SearchCubit>(context).getProduct(query: value);
         },
@@ -24,7 +27,7 @@ class SearchTopAppBar extends StatelessWidget {
       leading: IconButton(
         icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () {
-          Navigator.of(context).pushNamed('/home');
+          Navigator.of(context).pushNamed('/search');
         },
       ),
     );

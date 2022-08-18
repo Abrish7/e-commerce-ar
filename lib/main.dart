@@ -1,5 +1,4 @@
 import 'package:ecommerce_v3/config.dart';
-import 'package:ecommerce_v3/data/model/tag_product.dart';
 import 'package:ecommerce_v3/data/provider/cart_api.dart';
 import 'package:ecommerce_v3/data/provider/product_filter_by_category_api.dart';
 import 'package:ecommerce_v3/data/repository/cart_repo.dart';
@@ -9,6 +8,7 @@ import 'package:ecommerce_v3/logic/auth/bloc/auth_bloc.dart';
 import 'package:ecommerce_v3/logic/auth/cubit/user_cubit.dart';
 import 'package:ecommerce_v3/logic/cart/favorite_cubit.dart';
 import 'package:ecommerce_v3/logic/cart/total_cart_cubit.dart';
+import 'package:ecommerce_v3/logic/cubit/search_cubit.dart';
 import 'package:ecommerce_v3/logic/home/bottom_app_bar_cubit.dart';
 import 'package:ecommerce_v3/logic/order/order_cubit.dart';
 import 'package:ecommerce_v3/logic/other/like_cubit.dart';
@@ -85,7 +85,10 @@ class MyApp extends StatelessWidget {
         // Tag Cubit
         BlocProvider<TagCubit>(create: (context) => TagCubit()..getTag()),
         // Tag product Cubit
-        BlocProvider<TagProductCubit>(create: (context) => TagProductCubit())
+        BlocProvider<TagProductCubit>(create: (context) => TagProductCubit()),
+        // Search product Cubit
+        BlocProvider<SearchCubit>(
+            create: (context) => SearchCubit()..getProduct(query: ''))
       ],
       child: const MaterialApp(
         debugShowCheckedModeBanner: false,

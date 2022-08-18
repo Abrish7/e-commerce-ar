@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../logic/auth/cubit/user_cubit.dart';
+import '../../../logic/cart/total_cart_cubit.dart';
 
 class CartItem extends StatefulWidget {
   CartItem({Key? key, required this.index, required this.productId})
@@ -23,10 +24,12 @@ class _CartItemState extends State<CartItem> {
   late int activeIndex = 0;
   late int imageSize = 0;
   late String customerId = "";
+  late double total = 0;
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CartCubit, CartState>(
       builder: (context, state) {
+        total = 00;
         // if (state is CartLoaded) {
         return Column(
           // mainAxisAlignment: MainAxisAlignment.start,
@@ -141,11 +144,14 @@ class _CartItemState extends State<CartItem> {
                 Container(
                     padding: EdgeInsets.only(top: 20, right: 10, bottom: 20),
                     child: IconButton(
-                        onPressed: () {
-                          BlocProvider.of<CartCubit>(context)
-                              .removeCustomerCartItem(
-                                  customerId: customerId,
-                                  productId: this.widget.productId);
+                        onPressed: () async {
+                          await BlocProvider.of<CartCubit>(context)
+                            ..removeCustomerCartItem(
+                                customerId: customerId,
+                                productId: this.widget.productId);
+                          print('cart removed...');
+                          BlocProvider.of<TotalCartCubit>(context)
+                              .getTotalPrice(customerId: customerId);
                         },
                         icon: Icon(
                           Icons.cancel,

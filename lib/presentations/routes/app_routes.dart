@@ -13,6 +13,7 @@ import 'package:ecommerce_v3/presentations/screens/product_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/main_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/product_sub_category_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/profile_screen.dart';
+import 'package:ecommerce_v3/presentations/screens/search_detail_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/search_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/setting_screen.dart';
 import 'package:ecommerce_v3/presentations/screens/shipping_screen.dart';
@@ -25,7 +26,7 @@ class AppRoutes {
   static Route onGenerateRoute(RouteSettings routeSettings) {
     final args = routeSettings.arguments;
     final category = routeSettings.arguments;
-
+    final tags = routeSettings.arguments;
     switch (routeSettings.name) {
       case '/':
         return MaterialPageRoute(builder: (_) => AuthScreen());
@@ -68,6 +69,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => ProductSubCategoryScreen());
       case '/search':
         return MaterialPageRoute(builder: (_) => const SearchScreen());
+      case '/search_detail':
+        return MaterialPageRoute(builder: (_) => const SearchDetailsScreen());
       case '/setting':
         return MaterialPageRoute(builder: (_) => const SettingScreen());
       case '/shipping':

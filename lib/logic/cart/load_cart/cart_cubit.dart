@@ -3,6 +3,8 @@ import 'package:ecommerce_v3/data/model/cart_model.dart';
 import 'package:ecommerce_v3/data/repository/cart_repo.dart';
 import 'package:equatable/equatable.dart';
 
+import '../total_cart_cubit.dart';
+
 class CartCubit extends Cubit<CartState> {
   CartCubit(this.cartRepository) : super(CartState(cart: []));
   CartRepository cartRepository;
@@ -41,6 +43,8 @@ class CartCubit extends Cubit<CartState> {
           ..removeWhere((element) => element.id == productId);
         emit(state.copyWith(cart: carts));
       }
+      //  BlocProvider.of<TotalCartCubit>(context)
+      //                         .getTotalPrice(customerId: customerId);
     });
   }
 
