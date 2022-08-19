@@ -232,6 +232,8 @@ class _AuthWidgetState extends State<AuthWidget> {
   Widget _signUpButton() {
     return BlocConsumer<AuthBloc, AuthState>(builder: (context, state) {
       return ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.black)),
           onPressed: () {
             if (!(state.status == FormzStatus.submissionSuccess)) {
               BlocProvider.of<AuthBloc>(context).add(SignUpSubmitted());
@@ -325,7 +327,7 @@ class _AuthWidgetState extends State<AuthWidget> {
       }
       if (state.isConnectionOn) {
         setState(() {
-          signUpButton = const Text('Sign up');
+          signUpButton = const Text('Sign in');
         });
         buildSnackBar("No Internet Connection", Colors.red);
       }
@@ -333,12 +335,14 @@ class _AuthWidgetState extends State<AuthWidget> {
       return previous.status == current.status;
     }, builder: (context, state) {
       return ElevatedButton(
+          style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.black)),
           onPressed: state.status == FormzStatus.submissionSuccess
               ? null
               : () => BlocProvider.of<AuthBloc>(context).add(SignInSubmitted()),
           child: SizedBox(
               width: MediaQuery.of(context).size.width,
-              child: const Center(child: Text('Sign up'))));
+              child: const Center(child: Text('Sign in'))));
     });
   }
 

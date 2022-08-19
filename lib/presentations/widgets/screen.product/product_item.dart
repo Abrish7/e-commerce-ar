@@ -7,6 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import '../../../data/provider/cart_api.dart';
 import '../../../data/repository/cart_repo.dart';
 import '../../../logic/cart/load_cart/cart_cubit.dart';
+import '../../../logic/cart/total_cart_cubit.dart';
 
 class ProductItem extends StatelessWidget {
   const ProductItem({Key? key, required this.index}) : super(key: key);
@@ -81,6 +82,8 @@ class ProductItem extends StatelessWidget {
                                 customerId: customerId,
                                 productId: state.product[index].id,
                                 quantity: 1);
+                            BlocProvider.of<TotalCartCubit>(context)
+                                .getTotalPrice(customerId: customerId);
                           },
                           label: Text('add to cart'),
                         ),

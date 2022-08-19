@@ -13,20 +13,22 @@ class SearchWidget extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
         if (state is SearchLoaded) {
-          return ListView.builder(
-              itemCount: state.products.docs.length,
-              // itemCount: 5,
-              itemBuilder: ((context, index) {
-                return Container(
-                  padding: EdgeInsets.all(10),
-                  color: Colors.white,
-                  child: InkWell(
-                    splashColor: Colors.blue,
+          return Container(
+            width: 400,
+            child: ListView.builder(
+                itemCount: state.products.docs.length,
+                // itemCount: 5,
+                itemBuilder: ((context, index) {
+                  return InkWell(
+                    splashColor: Colors.grey,
+
                     overlayColor: MaterialStateProperty.all(Colors.blue),
                     highlightColor: Colors.red,
                     hoverColor: Colors.grey,
                     onTap: () {
-                      Navigator.of(context).pushNamed('/search_detail');
+                      print('clicked...');
+                      Navigator.of(context).pushNamed('/search_detail',
+                          arguments: state.products.docs[index].id);
                     },
                     // color: Colors.white,
                     child: Row(
@@ -61,9 +63,9 @@ class SearchWidget extends StatelessWidget {
                         )
                       ],
                     ),
-                  ),
-                );
-              }));
+                  );
+                })),
+          );
         }
         return Container();
       },

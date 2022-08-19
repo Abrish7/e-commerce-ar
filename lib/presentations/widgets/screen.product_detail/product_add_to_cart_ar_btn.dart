@@ -7,6 +7,7 @@ import '../../../data/provider/cart_api.dart';
 import '../../../data/repository/cart_repo.dart';
 import '../../../logic/cart/load_cart/cart_cubit.dart';
 import '../../../logic/cart/quantity_cubit.dart';
+import '../../../logic/cart/total_cart_cubit.dart';
 
 class ProductAddToCartAndARBtn extends StatelessWidget {
   const ProductAddToCartAndARBtn({
@@ -82,6 +83,8 @@ class ProductAddToCartAndARBtn extends StatelessWidget {
                                 customerId: customerId,
                                 productId: productState.product[index].id,
                                 quantity: quantityState.quantity);
+                            BlocProvider.of<TotalCartCubit>(context)
+                                .getTotalPrice(customerId: customerId);
                           },
                           label: Padding(
                             padding: const EdgeInsets.all(20.0),

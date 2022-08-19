@@ -7,6 +7,7 @@ import '../../../data/provider/cart_api.dart';
 import '../../../data/repository/cart_repo.dart';
 import '../../../logic/auth/cubit/user_cubit.dart';
 import '../../../logic/cart/load_cart/cart_cubit.dart';
+import '../../../logic/cart/total_cart_cubit.dart';
 
 class ProductFilterItem extends StatelessWidget {
   const ProductFilterItem({Key? key, required this.index}) : super(key: key);
@@ -79,6 +80,8 @@ class ProductFilterItem extends StatelessWidget {
                                 customerId: customerId,
                                 productId: state.product[index].id,
                                 quantity: 1);
+                            BlocProvider.of<TotalCartCubit>(context)
+                                .getTotalPrice(customerId: customerId);
                           },
                           label: Text('add to cart'),
                         ),

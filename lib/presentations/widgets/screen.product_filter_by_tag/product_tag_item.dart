@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import '../../../logic/cart/load_cart/cart_cubit.dart';
+import '../../../logic/cart/total_cart_cubit.dart';
 
 class ProductTagItem extends StatelessWidget {
   const ProductTagItem({Key? key, required this.index}) : super(key: key);
@@ -68,6 +69,8 @@ class ProductTagItem extends StatelessWidget {
                             customerId: customerId,
                             productId: state.product[index].id,
                             quantity: 1);
+                        BlocProvider.of<TotalCartCubit>(context)
+                            .getTotalPrice(customerId: customerId);
                       },
                       icon: Icon(
                         Icons.shopping_cart,
