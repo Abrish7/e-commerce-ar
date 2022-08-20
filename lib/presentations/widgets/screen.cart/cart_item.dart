@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
 import 'package:ecommerce_v3/logic/cart/quantity_cubit.dart';
 import 'package:ecommerce_v3/presentations/widgets/screen.cart/cart_quantity_counter.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -95,7 +94,7 @@ class _CartItemState extends State<CartItem> {
                 Container(
                     padding: EdgeInsets.only(left: 10),
                     child: Text(
-                      state.cart[this.widget.index].quantity.toString(),
+                      (state.cart[this.widget.index].quantity).toString(),
                       style:
                           TextStyle(fontWeight: FontWeight.w300, fontSize: 20),
                       textAlign: TextAlign.left,

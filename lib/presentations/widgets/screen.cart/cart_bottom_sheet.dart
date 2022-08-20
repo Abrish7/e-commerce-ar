@@ -49,7 +49,7 @@ class CartBottomSheet extends StatelessWidget {
               BlocBuilder<TotalCartCubit, TotalCartState>(
                 builder: (context, totalSt) {
                   print('widget: ' + totalSt.total.toString());
-                  return Text(totalSt.total,
+                  return Text((totalSt.total),
                       style:
                           TextStyle(fontSize: 16, fontWeight: FontWeight.w300));
                 },

@@ -1,5 +1,6 @@
 import 'package:ecommerce_v3/logic/cart/load_cart/cart_cubit.dart';
 import 'package:ecommerce_v3/logic/cart/quantity_cubit.dart';
+import 'package:ecommerce_v3/logic/cart/total_cart_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -80,6 +81,7 @@ class CartQuantityCounter extends StatelessWidget {
                   // customerId: customerId,
                   productId: productId,
                   quantity: quantity - 1);
+              // BlocProvider.of<TotalCartCubit>(context)..getTotalPrice(customerId: );
               // BlocProvider.of<QuantityCubit>(context).decreaseQuantityState(
               //     customerId: this.customerId,
               //     quantity: quantity,
