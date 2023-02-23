@@ -78,6 +78,7 @@ class CartQuantityCounter extends StatelessWidget {
                 backgroundColor: MaterialStateProperty.all(Colors.white)),
             onPressed: () {
               BlocProvider.of<CartCubit>(context).updateCart(
+                
                   // customerId: customerId,
                   productId: productId,
                   quantity: quantity - 1);
